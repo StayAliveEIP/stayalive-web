@@ -16,7 +16,7 @@ jobs:
         run: |
           git config --local user.email "matthieu.queru@epitech.eu"
           git config --local user.name "Matthieu33197"
-          git checkout -b release
+          git checkout release
           git add .
           git commit -m "Deploy to release branch"
           git push origin release
