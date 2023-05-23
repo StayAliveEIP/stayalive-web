@@ -1,0 +1,22 @@
+name: apprentissage-github
+run-name: checkup build
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install -g bats
+      - run: bats -v
+      - name: Deploy to Release Branch
+        # Déployer sur la branche "release"
+        run: |
+          git config --local user.email "matthieu.queru@epitech.eu"
+          git config --local user.name "Matthieu33197"
+          git checkout -b release
+          git add .
+          git commit -m "Deploy to release branch"
+          git push origin release
