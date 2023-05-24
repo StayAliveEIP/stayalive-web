@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/StayAliveEIP/stayalive-web">
-    <img src="https://media.discordapp.net/attachments/1019600215545749587/1051797618268852274/CleanShot_2022-12-12_at_10.47.552x.png?width=1144&height=1294" alt="Logo">
+    <img src="https://media.discordapp.net/attachments/1019600215545749587/1051797618268852274/CleanShot_2022-12-12_at_10.47.552x.png?width=1144&height=1294" alt="Logo" width="20%">
   </a>
 
 <h3 align="center">Stay Alive</h3>
