@@ -1,18 +1,73 @@
-name: apprentissage-github
-run-name: checkup build
-on: [push]
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  tags:
+    - '*'
+
 jobs:
-  check-bats-version:
+  build:
+    name: Build du projet
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
-      - name: Deploy to Release Branch
-        # Déployer sur la branche "release"
+          node-version: 14
+
+      - name: Installation des dépendances
+        run: npm install
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: true
+
+      - name: Archivage des fichiers de construction
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-files
+          path: build
+
+  test:
+    name: Exécution des tests
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Installation des dépendances
+        run: npm install
+
+      - name: Exécution des tests
+        run: npm run test
+
+  deploy:
+    name: Déploiement
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v2
+
+      - name: Déploiement
         run: |
           git config --local user.email "matthieu.queru@epitech.eu"
           git config --local user.name "Matthieu33197"
@@ -20,3 +75,17 @@ jobs:
           git add .
           git commit -m "Deploy to release branch"
           git push origin release
+
+  notification:
+    name: Notification
+    needs: [build, test, deploy]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Envoyer une notification en cas de succès
+        if: ${{ success() }}
+        run: echo "Le workflow a été exécuté avec succès. Toutes les étapes ont réussi."
+
+      - name: Envoyer une notification en cas d'échec
+        if: ${{ failure() }}
+        run: echo "Le workflow a échoué. Veuillez vérifier les étapes précédentes pour plus d'informations."
