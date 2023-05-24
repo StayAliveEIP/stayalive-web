@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/StayAliveEIP/stayalive-web">
-    <img src="https://media.discordapp.net/attachments/1019600215545749587/1051797618268852274/CleanShot_2022-12-12_at_10.47.552x.png?width=1144&height=1294" alt="Logo" width="150" height="50">
+    <img src="https://media.discordapp.net/attachments/1019600215545749587/1051797618268852274/CleanShot_2022-12-12_at_10.47.552x.png?width=1144&height=1294" alt="Logo">
   </a>
 
 <h3 align="center">Stay Alive</h3>
@@ -35,10 +35,6 @@
 </details>
 
 ## About The Project
-
-<div align="center">
-    <img src="https://koreus.cdn.li/thumbshigh/201703/aventures-fille-partition-midi.jpg" alt="Logo" width="400" height="366">
-</div>
 
 StayAlive est une application mobile permettant aux centres d'appels des services publics de notifier via une application mobile tous les soignants, aides soignants ainsi que secouristes à moins de 3 minutes du patient pour réduire le temps de prise en charge.
 
