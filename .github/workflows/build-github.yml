@@ -1,6 +1,9 @@
 name: CI/CD Workflow
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -14,13 +17,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 14
 
       - name: Installation des dépendances
         run: npm install
 
       - name: Changer de répertoire
-      run: cd stayalive
+        run: cd stayalive
 
       - name: Build
         run: npm run build
@@ -37,30 +40,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout du code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 14
 
-      - name: Installation des dépendances
+      - name: Install dependencies
         run: npm install
 
-      - name: Changer de répertoire
-      run: cd stayalive
-      
-      - name: Build
-        run: npm run build
-
       - name: Run tests and generate coverage report
-        run: npm run test:coverage
+        run: npm test -- --coverage --watchAll=false
 
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
 
   deploy:
     name: Déploiement
