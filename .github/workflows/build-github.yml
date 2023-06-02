@@ -14,10 +14,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Installation des dépendances
         run: npm install
+
+      - name: Changer de répertoire
+      run: cd stayalive
 
       - name: Build
         run: npm run build
@@ -40,11 +43,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Installation des dépendances
         run: npm install
 
+      - name: Changer de répertoire
+      run: cd stayalive
+      
       - name: Build
         run: npm run build
 
@@ -63,7 +69,7 @@ jobs:
 
     steps:
       - name: Checkout du code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Déploiement
         run: |
