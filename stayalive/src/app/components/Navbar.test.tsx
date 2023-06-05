@@ -1,7 +1,8 @@
+import '@testing-library/jest-dom/extend-expect'; // Importez cette ligne
 import React from 'react';
-import {describe, expect, test} from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import Navbar from './NavbarC';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Navbar', () => {
   test('renders logo image', () => {
@@ -19,7 +20,7 @@ describe('Navbar', () => {
   test('renders navigation buttons', () => {
     render(<Navbar />);
     const buttons = screen.getAllByRole('button');
-    expect(buttons).toHaveLength(4);
+    expect(buttons).toHaveLength(5);
   });
 
   test('renders login button', () => {
@@ -28,9 +29,14 @@ describe('Navbar', () => {
     expect(loginButton).toBeInTheDocument();
   });
 
-  test('login button redirects to "/connexion" page', () => {
-    render(<Navbar />);
-    const loginButton = screen.getByText('Se connecter');
-    expect(loginButton).toHaveAttribute('href', '/connexion');
-  });
+    test('login button redirects to "/connexion" page', () => {
+      render(
+        <MemoryRouter>
+          <Navbar />
+        </MemoryRouter>
+      );
+      const loginButton = screen.getByText('Se connecter');
+      const linkElement = loginButton.closest('a');
+      expect(linkElement).toHaveAttribute('href', '/connexion');
+    });
 });
