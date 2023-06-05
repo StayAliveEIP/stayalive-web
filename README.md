@@ -1,73 +1,70 @@
-## May 20, 2023
-<div id="top"></div>
-<br />
-<div align="center">
-  <a href="https://github.com/StayAliveEIP/stayalive-web">
-    <img src="https://media.discordapp.net/attachments/1019600215545749587/1051797618268852274/CleanShot_2022-12-12_at_10.47.552x.png?width=1144&height=1294" alt="Logo" width="20%">
-  </a>
+# Getting Started with Create React App
 
-<h3 align="center">Stay Alive</h3>
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-  <p align="center">
-    <br />
-  </p>
-</div>
+## Available Scripts
 
+In the project directory, you can run:
 
+### `npm start`
 
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-  </ol>
-</details>
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## About The Project
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-StayAlive est une application mobile permettant aux centres d'appels des services publics de notifier via une application mobile tous les soignants, aides soignants ainsi que secouristes à moins de 3 minutes du patient pour réduire le temps de prise en charge.
+### `npm test`
 
-### Built With
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-* [REACT](https://reactjs.org)
+### `npm run build`
 
-### Group we collaborated with
-QUERU Matthieu | matthieu.queru@epitech.eu<br />
-Noel Varga | noel.varga@epitech.eu<br />
-Bastien Cantet | bastien.cantet@epitech.eu<br />
-Florian Damiot | florian.damiot@epitech.eu<br />
-LEBLANCS Martin | martin.leblancs@epitech.eu
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Getting started
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-```
-You only need npm:
-- sudo apt install npm
-OR
-- sudo dnf install npm
-```
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### Installation
+### `npm run eject`
 
-Clone the repo
-   ```sh
-   - git clone git@github.com:StayAliveEIP/stayalive-web.git
-   ```
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-## Usage
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-  ```sh
-  - npm install
-  - npm start
-  ```
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
