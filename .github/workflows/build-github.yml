@@ -43,13 +43,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Install dependencies
-        run: npm install
+        run: |
+        cd stayalive
+        npm install
 
       - name: Run tests and generate coverage report
-        run: npm test -- --coverage --watchAll=false
+        run: |
+        cd stayalive
+        npm test -- --coverage --watchAll=false
 
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v2
