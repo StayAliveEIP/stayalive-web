@@ -47,13 +47,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-        cd stayalive
-        npm install
+            cd stayalive
+            npm install
 
       - name: Run tests and generate coverage report
         run: |
-        cd stayalive
-        npm test -- --coverage --watchAll=false
+            cd stayalive
+            npm test -- --coverage --watchAll=false
 
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v2
