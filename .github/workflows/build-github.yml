@@ -22,11 +22,10 @@ jobs:
       - name: Installation des dépendances
         run: npm install
 
-      - name: Changer de répertoire
-        run: cd stayalive
-
       - name: Build
-        run: npm run dev
+        run: |
+            cd stayalive-web/stayalive
+            npm run build
         env:
           CI: true
 
