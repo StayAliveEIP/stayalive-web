@@ -15,7 +15,7 @@ export default function Home() {
           </div>
           <div className={styles.formContainer}>
             <div className={styles.formGroup}>
-              <label htmlFor="etablissement" className={styles.label}>Numéro d'établissement</label>
+              <label htmlFor="etablissement" className={styles.label}>Numéro d&apos;établissement</label>
               <input
                 type="text"
                 id="etablissement"

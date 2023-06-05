@@ -24,7 +24,7 @@ export default function Home() {
               <label htmlFor="password" className={styles.label}>Confirmation Mot de passe</label>
               <input type="password" id="password" className={styles.input} />
             </div>
-            <button className={styles.button}>S'inscrire</button>
+            <button className={styles.button}>S&apos;inscrire</button>
       </div>
     </div>
     </div>
