@@ -24,7 +24,7 @@ jobs:
 
       - name: Build
         run: |
-            cd stayalive-web/stayalive
+            cd stayalive
             npm run build
         env:
           CI: true
