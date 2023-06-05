@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from 'stayalive/src/app/components/navbar.module.css';
+import styles from './navbar.module.css';
 import Image from 'next/image';
 
 const Navbar: React.FC = () => {
