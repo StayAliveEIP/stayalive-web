@@ -6,25 +6,25 @@ import { MemoryRouter } from 'react-router-dom';
 
 describe('Navbar', () => {
   test('renders logo image', () => {
-    render(<Navbar />);
+    render(<Navbar isLoginPage={false} />);
     const logoImage = screen.getByAltText('Description de l\'image');
     expect(logoImage).toBeInTheDocument();
   });
 
   test('renders logo text', () => {
-    render(<Navbar />);
+    render(<Navbar isLoginPage={false} />);
     const logoText = screen.getByText('StayAlive');
     expect(logoText).toBeInTheDocument();
   });
 
   test('renders navigation buttons', () => {
-    render(<Navbar />);
+    render(<Navbar isLoginPage={true} />);
     const buttons = screen.getAllByRole('button');
     expect(buttons).toHaveLength(5);
   });
 
   test('renders login button', () => {
-    render(<Navbar />);
+    render(<Navbar isLoginPage={false} />);
     const loginButton = screen.getByText('Se connecter');
     expect(loginButton).toBeInTheDocument();
   });
@@ -32,7 +32,7 @@ describe('Navbar', () => {
     test('login button redirects to "/connexion" page', () => {
       render(
         <MemoryRouter>
-          <Navbar />
+          <Navbar isLoginPage={false} />
         </MemoryRouter>
       );
       const loginButton = screen.getByText('Se connecter');

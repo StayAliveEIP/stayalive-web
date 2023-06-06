@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from './navbar.module.css';
 import Image from 'next/image';
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<{ isLoginPage: boolean }> = ({ isLoginPage }) => {
 
   return (
     <nav className={styles.nav}>
@@ -20,8 +20,8 @@ const Navbar: React.FC = () => {
       </div>
       </div>
       <div className={styles['login-button']}>
-      <Link href="/connexion">
-            <button className={styles['red-button']}>Se connecter</button>
+      <Link href={isLoginPage ? "/inscription" : "/connexion"}>
+          <button className={styles['red-button']}>{isLoginPage ? "Inscription" : "Se connecter"}</button>
       </Link>
       </div>
     </nav>

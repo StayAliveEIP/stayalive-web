@@ -1,11 +1,11 @@
-import Navbar from '../../components/NavbarI';
+import Navbar from '../../components/NavbarC';
 import styles from './connexion.module.css';
 
 export default function Home() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar isLoginPage={true} />
       <div className={styles.pageContainer}>
         <div className={styles.container}>
           <div className={styles.header}>

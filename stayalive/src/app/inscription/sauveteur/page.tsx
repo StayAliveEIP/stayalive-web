@@ -4,7 +4,7 @@ import styles from './connexion.module.css';
 export default function Home() {
   return (
     <div>
-        <Navbar />
+        <Navbar isLoginPage={false} />
     <div className={styles.pageContainer}>
       <div className={styles.container}>
         <div className={styles.header}>
@@ -22,7 +22,7 @@ export default function Home() {
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="password" className={styles.label}>Confirmation Mot de passe</label>
-              <input type="password" id="password" className={styles.input} />
+              <input type="password" id="Cpassword" className={styles.input} />
             </div>
             <button className={styles.button}>S&apos;inscrire</button>
       </div>

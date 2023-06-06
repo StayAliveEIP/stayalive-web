@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <div>
-        <Navbar />
+        <Navbar isLoginPage={false} />
     <div className={styles.pageContainer}>
       <div className={styles.container}>
         <div className={styles.header}>
