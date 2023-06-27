@@ -1,5 +1,7 @@
 import Navbar from '../../components/NavbarC'
 import styles from './connexion.module.css';
+import Link from 'next/link';
+import { FiArrowLeft } from 'react-icons/fi';
 
 export default function Home() {
   return (
@@ -25,6 +27,14 @@ export default function Home() {
               <input type="email" id="email" className={styles.input} />
             </div>
         <button className={styles.button}>Faire la demande</button>
+            <div className={styles.returnButton}>
+            <Link href="/inscription">
+                <button className={styles.returnButtonContent}>
+                    <FiArrowLeft className={styles.returnButtonIcon} />
+                    <span className={styles.returnButtonText}>Retour</span>
+                </button>
+            </Link>
+            </div>
       </div>
     </div>
     </div>

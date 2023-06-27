@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 500px;
-    height: 400px;
+    height: 500px;
     border-radius: 10%;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -81,3 +81,69 @@
   color: black;
 }
   
+
+
+.returnButton {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.returnButtonContent {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #c42f30;
+  cursor: pointer;
+}
+
+.returnButtonContent:hover {
+  text-decoration: underline;
+}
+
+.returnButtonIcon {
+  margin-right: 5px;
+}
+
+.returnButtonText {
+  font-size: 16px;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.buttonF,
+.buttonA,
+.buttonG {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #000000;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.buttonF:hover,
+.buttonA:hover,
+.buttonG:hover {
+  background-color: #000000;
+  border-color: #ffffff;
+}
+
+.buttonTextF,
+.buttonTextA,
+.buttonTextG {
+  font-size: 20px;
+}
+
+.formContainer {
+  margin-top: 20px;
+}

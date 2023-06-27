@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 500px;
-    height: 400px;
+    height: 500px;
     border-radius: 10%;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -80,4 +80,50 @@
   border-radius: 4px;
   color: black;
 }
-  
+
+.returnButton {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.returnButtonContent {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #c42f30;
+  cursor: pointer;
+}
+
+.returnButtonContent:hover {
+  text-decoration: underline;
+}
+
+.returnButtonIcon {
+  margin-right: 5px;
+}
+
+.returnButtonText {
+  font-size: 16px;
+}
+
+.forgotPassword {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.forgotPasswordLink {
+  color: #000000;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.forgotPasswordLink:hover {
+  color: #c42f30;
+  text-decoration: underline;
+}
+
+.forgotPasswordLink:active {
+  color: #c42f30;
+}

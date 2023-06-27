@@ -1,6 +1,7 @@
 import Navbar from '../components/NavbarC'
 import styles from './connexion.module.css';
 import Link from 'next/link';
+import { FiArrowLeft } from 'react-icons/fi';
 
 export default function Home() {
   return (
@@ -26,6 +27,14 @@ export default function Home() {
           Sauveteur
         </button>
         </Link>
+        <div className={styles.returnButton}>
+            <Link href="/">
+                <button className={styles.returnButtonContent}>
+                    <FiArrowLeft className={styles.returnButtonIcon} />
+                    <span className={styles.returnButtonText}>Retour</span>
+                </button>
+            </Link>
+            </div>
       </div>
     </div>
     </div>
