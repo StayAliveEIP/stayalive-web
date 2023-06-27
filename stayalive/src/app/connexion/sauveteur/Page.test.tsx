@@ -29,7 +29,7 @@ describe('Home', () => {
 
   test('renders submit button', () => {
     render(<Home />);
-    const submitButton = screen.getByText('Submit');
+    const submitButton = screen.getByText('Se connecter');
     expect(submitButton).toBeInTheDocument();
   });
 });
