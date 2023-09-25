@@ -15,7 +15,7 @@ export default function Home() {
     try {
       console.log('email', email);
       console.log('password', password);
-      const response = await fetch('mettre notre api', {
+      const response = await fetch('http://api.stayalive.fr:3000/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -24,10 +24,8 @@ export default function Home() {
       });
 
       if (response.ok) {
-        // Connexion réussie, effectuez les actions nécessaires ici
         console.log('Connexion réussie !');
       } else {
-        // Gérez les erreurs ici
         console.error('Erreur lors de la connexion');
       }
     } catch (error) {

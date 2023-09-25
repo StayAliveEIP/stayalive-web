@@ -61,8 +61,14 @@
   .login-button button:active {
     transform: scale(0.65);
   }
-  
 
-  
+  .button-transition {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .button-clicked {
+    opacity: 0;
+    pointer-events: none; /* Pour désactiver les interactions avec le bouton pendant l'animation */
+  }
   
   

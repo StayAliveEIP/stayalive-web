@@ -140,7 +140,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid #000000;
+  border: 2px solid #060606;
   background-color: #ffffff;
   display: flex;
   align-items: center;
@@ -152,7 +152,7 @@
 .buttonF:hover,
 .buttonA:hover,
 .buttonG:hover {
-  background-color: #000000;
+  background-color: #c42f30;
   border-color: #ffffff;
 }
 

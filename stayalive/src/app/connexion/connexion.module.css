@@ -81,3 +81,10 @@
   .returnButtonText {
     font-size: 16px;
   }
+
+  .fade-out {
+    color: aqua !important;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
