@@ -8,16 +8,13 @@ const Navbar: React.FC<{ isLoginPage: boolean }> = ({ isLoginPage }) => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   
   const handleButtonClick = () => {
-    // Activer l'animation
     setIsButtonClicked(true);
 
-    // Réinitialiser l'animation après un délai (0.3s dans cet exemple)
     setTimeout(() => {
       setIsButtonClicked(false);
     }, 300);
   };
 
-  // Détermine la classe CSS en fonction de l'état isButtonClicked
   const buttonClass = isButtonClicked
     ? `${styles['red-button']} ${styles['button-transition']} ${styles['button-clicked']}`
     : `${styles['red-button']} ${styles['button-transition']}`;

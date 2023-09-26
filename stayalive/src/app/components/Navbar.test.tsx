@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom/extend-expect'; // Importez cette ligne
+import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import Navbar from './NavbarC';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -29,14 +29,31 @@ describe('Navbar', () => {
     expect(loginButton).toBeInTheDocument();
   });
 
-    test('login button redirects to "/connexion" page', () => {
-      render(
-        <MemoryRouter>
-          <Navbar isLoginPage={false} />
-        </MemoryRouter>
-      );
-      const loginButton = screen.getByText('Se connecter');
-      const linkElement = loginButton.closest('a');
-      expect(linkElement).toHaveAttribute('href', '/connexion');
+  test('login button redirects to "/connexion" page', () => {
+    render(
+      <MemoryRouter>
+        <Navbar isLoginPage={false} />
+      </MemoryRouter>
+    );
+    const loginButton = screen.getByText('Se connecter');
+    const linkElement = loginButton.closest('a');
+    expect(linkElement).toHaveAttribute('href', '/connexion');
+  });
+
+  test('changes button class on click', () => {
+    render(<Navbar isLoginPage={false} />);
+    const loginButton = screen.getByText('Se connecter');
+
+    act(() => {
+      fireEvent.click(loginButton);
     });
+
+    expect(loginButton).toHaveClass('red-button button-transition button-clicked');
+
+    setTimeout(() => {
+      expect(loginButton).not.toHaveClass('button-clicked');
+    }, 300);
+  });
 });
+
+

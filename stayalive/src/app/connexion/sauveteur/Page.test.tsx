@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import Home from './page';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Home', () => {
   test('renders Navbar component', () => {
@@ -32,4 +34,19 @@ describe('Home', () => {
     const submitButton = screen.getByText('Se connecter');
     expect(submitButton).toBeInTheDocument();
   });
+
+  test('changes button class on click', () => {
+    render(<Home />);
+    const submitButton = screen.getByText('Se connecter');
+
+    act(() => {
+      fireEvent.click(submitButton);
+    });
+
+
+    setTimeout(() => {
+      expect(submitButton).not.toHaveClass('fade-out');
+    }, 10000);
+  });
+
 });
