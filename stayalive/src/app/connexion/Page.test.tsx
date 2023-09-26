@@ -56,7 +56,6 @@ describe('Home', () => {
 
     expect(etablissementButton).toHaveClass('button fade-out');
 
-    // Wait for the animation to complete (adjust the timeout if needed)
     setTimeout(() => {
       expect(etablissementButton).not.toHaveClass('fade-out');
     }, 10000);
