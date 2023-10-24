@@ -81,3 +81,8 @@
   .returnButtonText {
     font-size: 16px;
   }
+
+  .fadeOut {
+    opacity: 0;
+    transition: opacity 3s ease-out;
+}

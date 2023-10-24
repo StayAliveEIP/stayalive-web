@@ -40,11 +40,119 @@
 
 .title2 {
   position: absolute;
-  top: 90%; 
   left: 35%; 
   z-index: 1; 
   color: black; 
   font-size: 30px; 
   text-align: center; 
-  font-weight: lighter;
+  font-weight: bold;
+}
+
+.text2 {
+  position: absolute;
+  top: 10%;
+  left: 17%;
+  color: black; 
+  font-size: 18px; 
+  text-align: center; 
+}
+
+.informationContainer {
+  position: absolute;
+  z-index: 1;
+  background-color: #ffffff; 
+  width: 100%;
+  height: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
+.circle {
+  width: 315px; /* Définissez la taille de votre cercle */
+  height: 315px;
+  background-color: #E9E9E9; /* Couleur grise */
+  border-radius: 50%; /* Pour obtenir un cercle */
+  margin: 100px; /* Espacement entre les cercles */
+  display: inline-block; /* Pour les afficher en ligne */
+}
+
+.image1 {
+  width: 45%; /* Ajustez la taille de l'image si nécessaire */
+  height: 70%;
+}
+
+.text3 {
+  position: absolute;
+  color: black; 
+  font-size: 22px; 
+  text-align: center; 
+  font-weight: bold;
+  top: 65%;
+  left: 11%;
+}
+
+.text4 {
+  position: absolute;
+  color: black; 
+  font-size: 22px; 
+  text-align: center; 
+  top: 65%;
+  left: 40%;
+  font-weight: bold;
+}
+
+.text5 {
+  position: absolute;
+  color: black; 
+  font-size: 22px; 
+  text-align: center; 
+  top: 70%;
+  left: 42%;
+  font-weight: bold;
+}
+
+.text6 {
+  position: absolute;
+  color: black; 
+  font-size: 22px; 
+  text-align: center; 
+  top: 65%;
+  left: 72%;
+  font-weight: bold;
+}
+
+.text7 {
+  position: absolute;
+  color: black; 
+  font-size: 18px; 
+  text-align: center; 
+  top: 78%;
+  left: 10%;
+}
+
+.text8 {
+  position: absolute;
+  color: black; 
+  font-size: 18px; 
+  text-align: center; 
+  top: 81%;
+  left: 10%;
+}
+
+.text9 {
+  position: absolute;
+  color: black; 
+  font-size: 18px; 
+  text-align: center; 
+  top: 78%;
+  left: 37%;
+}
+
+.text10 {
+  position: absolute;
+  color: black; 
+  font-size: 18px; 
+  text-align: center; 
+  top: 81%;
+  left: 37%;
 }
