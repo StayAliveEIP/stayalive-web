@@ -1,0 +1,123 @@
+/* styles.module.css */
+
+/* Styles de la carte */
+.card {
+  background-color: #ffffff; /* Couleur de fond */
+  color: #000000; /* Couleur du texte */
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Ombre */
+  text-align: center;
+  margin: 20px auto;
+}
+
+/* Style du titre */
+.card-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Style du texte */
+.card-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Style du bouton */
+.card-button {
+  background-color: #e74c3c; /* Couleur du bouton (rouge) */
+  color: #fff; /* Couleur du texte du bouton */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transition de couleur au survol */
+}
+
+/* Style du bouton au survol */
+.card-button:hover {
+  background-color: #c0392b; /* Nouvelle couleur au survol */
+}
+
+.card-container {
+  display: flex;
+}
+
+.achievement-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Styles généraux pour chaque succès */
+.achievement {
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Style pour un succès complété */
+.completed {
+  background-color: #2ecc71; /* vert */
+  color: #ffffff;
+}
+
+/* Style pour un succès non complété */
+.incomplete {
+  background-color: #e74c3c; /* rouge */
+  color: #ffffff;
+}
+
+/* Style au survol d'un succès */
+.achievement:hover {
+  opacity: 0.9;
+}
+
+.achievement-section {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.achievement-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.chart-container {
+  width: 80%;
+  margin: 30px auto;
+}
+
+.chart-title {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 28px;
+}
+
+.stats-circle {
+  background-color: #e74c3c;
+  color: #fff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
