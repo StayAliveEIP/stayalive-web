@@ -12,7 +12,7 @@ export default function Home() {
       <h2 className={styles.text}>Téléchargez gratuitement l’application StayAlive</h2>
       <Image src="https://www.freepnglogos.com/uploads/app-store-logo-png/apple-app-store-travel-awards-globestamp-7.png" className={styles.appstore} alt="Description de l'image" width="1942" height="10" />
       <div className={styles.informationContainer}>
-        <h1 className={styles.title2}>Sauvez des vies près de chez vous !</h1>
+      <h1 className={styles.title2} id="presentationTarget">Sauvez des vies près de chez vous !</h1>
         <h2 className={styles.text2}>Stay Alive permet aux centres d’appels des urgences de pouvoir notifier une communauté de soignant afin d’intervenir sur des urgences ! </h2>
           <div className={styles.circle}>
             <Image src="https://media.discordapp.net/attachments/1130401857890697285/1163099431575498902/clipart3194654.png?ex=653e57c1&is=652be2c1&hm=9c49aa9a22c27c80afa8b92918ceb41f038d8b2f1500914e3e9f1827fc429648&=&width=732&height=1184" className={styles.image1} alt="Description de l'image" width="100" height="100" />
@@ -46,7 +46,7 @@ export default function Home() {
               <button type="submit" className={styles.contactButton}>Envoyer</button>
             </form>
           </div>
-          <footer className={styles.footer}>
+          <footer className={styles.footer} id="aboutTarget">
       <div className={styles.footerContent}>
         <div className={styles.footerLinks}>
           <a href="/legal">Informations légales</a>

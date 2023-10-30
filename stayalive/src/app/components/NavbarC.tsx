@@ -29,9 +29,12 @@ const Navbar: React.FC<{ isLoginPage: boolean }> = ({ isLoginPage }) => {
         <span className={styles.logoText}>StayAlive</span>
         <div className={styles.buttons}>
           <button className={`${styles['white-button']} ${styles['button-transition']}`}>Acceuil</button>
-          <button className={`${styles['white-button']} ${styles['button-transition']}`}>Présentation</button>
-          <button className={`${styles['white-button']} ${styles['button-transition']}`}>Fonctionnalité</button>
-          <button className={`${styles['white-button']} ${styles['button-transition']}`}>A propos</button>
+          <a href="#presentationTarget">
+            <button className={`${styles['white-button']} ${styles['button-transition']}`}>Présentation</button>
+          </a>
+          <a href="#aboutTarget">
+            <button className={`${styles['white-button']} ${styles['button-transition']}`}>A propos</button>
+          </a>
         </div>
       </div>
       <div className={styles['login-button']}>

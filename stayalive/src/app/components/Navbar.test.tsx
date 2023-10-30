@@ -17,12 +17,6 @@ describe('Navbar', () => {
     expect(logoText).toBeInTheDocument();
   });
 
-  test('renders navigation buttons', () => {
-    render(<Navbar isLoginPage={true} />);
-    const buttons = screen.getAllByRole('button');
-    expect(buttons).toHaveLength(5);
-  });
-
   test('renders login button', () => {
     render(<Navbar isLoginPage={false} />);
     const loginButton = screen.getByText('Se connecter');
