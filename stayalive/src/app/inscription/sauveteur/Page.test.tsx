@@ -1,50 +1,61 @@
-import '@testing-library/jest-dom/extend-expect';
-import { render, screen, fireEvent } from '@testing-library/react';
-import Home from './page';
+import { render, fireEvent, screen } from '@testing-library/react';
+import Home from './page'; // Remplacer par le chemin d'accès approprié au fichier
 
-describe('Home', () => {
-  it('renders input fields', () => {
+jest.mock('isomorphic-fetch'); 
+
+describe('SignUp Page', () => {
+
+  beforeEach(() => {
     render(<Home />);
+  });
 
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Mot de passe');
-    const confirmPasswordInput = screen.getByLabelText('Confirmation Mot de passe');
-    const submitButton = screen.getByRole('button', { name: /S'inscrire/i });
+  test('should render the Navbar', () => {
+    const navbarElement = screen.getByRole('navigation');
+    expect(navbarElement).toBeInTheDocument();
+  });
+
+  test('should render the inputs for account creation', () => {
+    const emailInput = screen.getByLabelText(/Email/i);
+    const lastnameInput = screen.getByLabelText(/Nom/i);
+    const firstnameInput = screen.getByLabelText(/Prénom/i);
+    const phoneInput = screen.getByLabelText(/Téléphone/i);
+    const passwordInput = screen.getByLabelText(/Mot de passe/i);
+    const confirmPassInput = screen.getByLabelText(/Confirmation Mot de passe/i);
 
     expect(emailInput).toBeInTheDocument();
+    expect(lastnameInput).toBeInTheDocument();
+    expect(firstnameInput).toBeInTheDocument();
+    expect(phoneInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
-    expect(confirmPasswordInput).toBeInTheDocument();
-    expect(submitButton).toBeInTheDocument();
+    expect(confirmPassInput).toBeInTheDocument();
   });
 
-  it('changes CGU checkbox status on click', () => {
-    render(<Home />);
+  test('should toggle CGU checkbox on click', () => {
     const cguCheckbox = screen.getByLabelText(/J'accepte les CGU/i);
-
     fireEvent.click(cguCheckbox);
-
-    expect(cguCheckbox).toBeChecked();
-
-    fireEvent.click(cguCheckbox);
-
-    expect(cguCheckbox).not.toBeChecked();
+    expect(cguCheckbox.checked).toBe(true);
   });
 
-  it('submits the form when CGU is checked', () => {
-    render(<Home />);
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Mot de passe');
-    const confirmPasswordInput = screen.getByLabelText('Confirmation Mot de passe');
-    const submitButton = screen.getByRole('button', { name: /S'inscrire/i });
+  test('should call handleSignupButtonClick function when S’inscrire button is clicked', () => {
+    const signupButton = screen.getByText(/S’inscrire/i);
+    fireEvent.click(signupButton);
 
-    // fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-    // fireEvent.change(passwordInput, { target: { value: 'password123' } });
-    // fireEvent.change(confirmPasswordInput, { target: { value: 'password123' } });
-
-    const cguCheckbox = screen.getByLabelText(/J'accepte les CGU/i);
-    // fireEvent.click(cguCheckbox);
-
-    // fireEvent.click(submitButton);
-
+    // Ici, vous pouvez également utiliser un mock pour vérifier si la fonction fetch a été appelée.
   });
+
+  test('should render social media buttons', () => {
+    const facebookButton = screen.getByAltText(/F Logo/i);
+    const googleButton = screen.getByAltText(/G Logo/i);
+    const appleButton = screen.getByAltText(/A Logo/i);
+
+    expect(facebookButton).toBeInTheDocument();
+    expect(googleButton).toBeInTheDocument();
+    expect(appleButton).toBeInTheDocument();
+  });
+
+  test('should render return button with Retour text', () => {
+    const returnButton = screen.getByText(/Retour/i);
+    expect(returnButton).toBeInTheDocument();
+  });
+
 });

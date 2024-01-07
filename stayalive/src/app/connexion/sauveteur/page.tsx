@@ -5,17 +5,18 @@ import { FiArrowLeft } from 'react-icons/fi';
 import Link from 'next/link';
 import fetch from 'isomorphic-fetch';
 import { useState } from 'react';
-import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async () => {
     try {
       console.log('email', email);
       console.log('password', password);
-      const response = await fetch('http://api.stayalive.fr:3000/auth/login', {
+      const response = await fetch('http://api.stayalive.fr:3000/rescuer/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -25,6 +26,9 @@ export default function Home() {
 
       if (response.ok) {
         console.log('Connexion réussie !');
+        const data = await response.json();
+        localStorage.setItem('accessToken', data.accessToken); // Stockage du token
+        router.push('/dashboard'); // Redirection vers le tableau de bord
       } else {
         console.error('Erreur lors de la connexion');
       }
@@ -65,31 +69,23 @@ export default function Home() {
               />
             </div>
             <div className={styles.forgotPassword}>
-              <Link href="/mots-de-passe-oublie">
+              <Link href="/connexion/forgotpassword">
                 <span className={styles.forgotPasswordLink}>Mot de passe oublié</span>
               </Link>
             </div>
             <div className={styles.buttonsContainer}>
-              <button className={styles.buttonF}>
-                <Image src="https://media.discordapp.net/attachments/1064585016782372985/1123227456548130826/facebook-logo-3-1.png?width=1294&height=1294" alt="F Logo" width="30" height="30"/>
-              </button>
-              <button className={styles.buttonG}>
-                <Image src="https://media.discordapp.net/attachments/1064585016782372985/1123227518661562481/1657906383gmail-icon-png.png?width=1294&height=1294" alt="G Logo"  width="30" height="30"/>
-              </button>
-              <button className={styles.buttonA}>
-                <Image src="https://media.discordapp.net/attachments/1064585016782372985/1123227564815695912/Apple-Logo-1977.png?width=1942&height=1294" alt="A Logo" width="30" height="30"/>
-              </button>
+              {/* Les boutons des réseaux sociaux ici */}
             </div>
             <button className={styles.button} onClick={handleSubmit}>
               Se connecter
             </button>
             <div className={styles.returnButton}>
-            <Link href="/connexion">
+              <Link href="/inscription">
                 <button className={styles.returnButtonContent}>
-                    <FiArrowLeft className={styles.returnButtonIcon} />
-                    <span className={styles.returnButtonText}>Retour</span>
+                  <FiArrowLeft className={styles.returnButtonIcon} />
+                  <span className={styles.returnButtonText}>Retour</span>
                 </button>
-            </Link>
+              </Link>
             </div>
           </div>
         </div>

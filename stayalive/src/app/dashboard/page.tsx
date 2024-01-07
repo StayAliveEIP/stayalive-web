@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo, useState } from 'react';
 import styles from './navbar.module.css';
-import Navbar from '../components/NavbarC';
 import Image from 'next/image';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale } from 'chart.js';
-
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import NavbarD from '../components/NavBarD';
+import { useRouter } from 'next/navigation';
 
 const containerStyle = {
   width: '100%',
@@ -19,7 +19,7 @@ const center = {
 
 const defibrillatorCount = 123;
 
-export default function Home() {
+export default function Dashboard() {
   const achievements = [
     { id: 1, status: true, text: "PROFILE COMPLET" },
     { id: 2, status: true, text: "SIGNAL TON PREMIER DEFIBRILLATEUR" },
@@ -29,7 +29,9 @@ export default function Home() {
     { id: 6, status: false, text: "TON PREMIER ACHAT STAYALIVE" },
   ];
 
+  const [accessToken, setAccessToken] = useState('');
   const chartRef = useRef(null);
+  const router = useRouter();
 
   const data = useMemo(() => ({
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', "Nov", "Dec"],
@@ -40,36 +42,44 @@ export default function Home() {
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1
     }]
-}), []);
+  }), []);
 
-const options = useMemo(() => ({
-  scales: {
+  const options = useMemo(() => ({
+    scales: {
       y: {
           beginAtZero: true
       }
   }
-}), []);
+  }), []);
 
   useEffect(() => {
-      Chart.register(BarController, BarElement, CategoryScale, LinearScale);
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      router.push('/connexion');
+    } else {
+      setAccessToken(token);
+    }
 
-      if (chartRef.current) {
-          const chartInstance = new Chart(chartRef.current, {
-              type: 'bar',
-              data: data,
-              options: options
-          });
+    Chart.register(BarController, BarElement, CategoryScale, LinearScale);
 
-          // Cleanup
-          return () => chartInstance.destroy();
-      }
-  }, [data, options]);
-  
+    if (chartRef.current) {
+      const chartInstance = new Chart(chartRef.current, {
+        type: 'bar',
+        data: data,
+        options: options
+      });
+
+      return () => chartInstance.destroy();
+    }
+  }, [data, options, router]);
 
   return (
     <div>
-    <Navbar isLoginPage={false} />
-    <div className={styles['card-container']}>
+      <NavbarD isLoginPage={false} />
+      <div className={styles.accessTokenDisplay}>
+        Access Token: {accessToken}
+      </div>
+      <div className={styles['card-container']}>
     <div className={`${styles.card}`}>
     <div className={styles['card-image']}>
         <Image
@@ -137,3 +147,5 @@ const options = useMemo(() => ({
     </div>
   );
 }
+
+

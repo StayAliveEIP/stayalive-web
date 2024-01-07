@@ -1,0 +1,25 @@
+.rescueSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .rescueTitle {
+    margin-right: 20px;
+    font-size: 24px;
+  }
+  
+  .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background-color: #c42f30;
+    color: white;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  

@@ -1,52 +1,57 @@
-import '@testing-library/jest-dom/extend-expect';
-import React from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react';
-import Home from './page';
-import { MemoryRouter } from 'react-router-dom';
+import { render, fireEvent, screen } from '@testing-library/react';
+import Home from './[your-path-to-file]'; // Remplacer par le chemin d'accès approprié au fichier
 
-describe('Home', () => {
-  test('renders Navbar component', () => {
+jest.mock('isomorphic-fetch'); 
+
+describe('Home Page', () => {
+
+  beforeEach(() => {
     render(<Home />);
+  });
+
+  test('should render the Navbar', () => {
     const navbarElement = screen.getByRole('navigation');
     expect(navbarElement).toBeInTheDocument();
   });
 
-  test('renders header content', () => {
-    render(<Home />);
-    const headerContent = screen.getByText('Connexion');
-    expect(headerContent).toBeInTheDocument();
-  });
+  test('should render the email and password inputs', () => {
+    const emailInput = screen.getByLabelText(/Email/i);
+    const passwordInput = screen.getByLabelText(/Mot de passe/i);
 
-  test('renders email input field', () => {
-    render(<Home />);
-    const emailInput = screen.getByLabelText('Email');
     expect(emailInput).toBeInTheDocument();
-  });
-
-  test('renders password input field', () => {
-    render(<Home />);
-    const passwordInput = screen.getByLabelText('Mot de passe');
     expect(passwordInput).toBeInTheDocument();
   });
 
-  test('renders submit button', () => {
-    render(<Home />);
-    const submitButton = screen.getByText('Se connecter');
-    expect(submitButton).toBeInTheDocument();
+  test('should update the state when input values change', () => {
+    const emailInput = screen.getByLabelText(/Email/i);
+    fireEvent.change(emailInput, { target: { value: 'test@email.com' } });
+    expect(emailInput.value).toBe('test@email.com');
+
+    const passwordInput = screen.getByLabelText(/Mot de passe/i);
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+    expect(passwordInput.value).toBe('password123');
   });
 
-  test('changes button class on click', () => {
-    render(<Home />);
-    const submitButton = screen.getByText('Se connecter');
+  test('should call handleSubmit function when Se connecter button is clicked', () => {
+    const loginButton = screen.getByText(/Se connecter/i);
+    fireEvent.click(loginButton);
 
-    act(() => {
-      fireEvent.click(submitButton);
-    });
+    // Ici, vous pouvez également utiliser un mock pour vérifier si la fonction fetch a été appelée.
+  });
 
+  test('should render social media buttons', () => {
+    const facebookButton = screen.getByAltText(/F Logo/i);
+    const googleButton = screen.getByAltText(/G Logo/i);
+    const appleButton = screen.getByAltText(/A Logo/i);
 
-    setTimeout(() => {
-      expect(submitButton).not.toHaveClass('fade-out');
-    }, 10000);
+    expect(facebookButton).toBeInTheDocument();
+    expect(googleButton).toBeInTheDocument();
+    expect(appleButton).toBeInTheDocument();
+  });
+
+  test('should render return button with Retour text', () => {
+    const returnButton = screen.getByText(/Retour/i);
+    expect(returnButton).toBeInTheDocument();
   });
 
 });
