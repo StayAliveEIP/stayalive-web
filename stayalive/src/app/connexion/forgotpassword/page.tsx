@@ -9,7 +9,8 @@ import { useState } from 'react';
 export default function Home() {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null); // Ajout d'un état pour l'erreur
+  const [error, setError] = useState<string | null>(null); // Ajout d'un état pour l'erreur
+
   const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async () => {
@@ -29,9 +30,14 @@ export default function Home() {
         throw new Error('Erreur lors de l’envoi de mail');
       }
       setSuccessMessage('Un email de récupération a bien été envoyé par mail');
-    } catch (error) {
+    } catch (error: unknown) {
+      let errorMessage = 'Erreur lors de la connexion';
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+    
       setTimeout(() => {
-        setError(error.message || 'Erreur lors de la connexion');
+        setError(errorMessage);
       }, 2000);
     } finally {
       setTimeout(() => {
