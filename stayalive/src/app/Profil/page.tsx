@@ -82,11 +82,12 @@ export default function Profil() {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleImageChange = (event) => {
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setSelectedImage(URL.createObjectURL(event.target.files[0]));
     }
   };
+  
 
   const triggerFileInput = () => {
     document.getElementById('fileInput').click();
