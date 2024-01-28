@@ -6,9 +6,26 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import RescueCounter from './components/RescueCounter';
 
+
+
 export default function Profil() {
+  interface ProfileData {
+    lastname: string;
+    firstname: string;
+    email: {
+      email: string;
+      verified: boolean;
+    };
+    phone: {
+      phone: string;
+      verified: boolean;
+    };
+    // Include other properties as needed
+  }
+  
   const [accessToken, setAccessToken] = useState('');
-  const [profileData, setProfileData] = useState(null);
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+
   const router = useRouter();
 
   const signalements = [
