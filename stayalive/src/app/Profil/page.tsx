@@ -167,7 +167,7 @@ export default function Profil() {
   const openDeleteModal = () => setShowDeleteModal(true);
   const closeDeleteModal = () => setShowDeleteModal(false);
 
-  const handlePasswordChange = (e) => setPasswordForDeletion(e.target.value);
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setPasswordForDeletion(e.target.value);
 
   const submitAccountDeletion = async () => {
     try {
