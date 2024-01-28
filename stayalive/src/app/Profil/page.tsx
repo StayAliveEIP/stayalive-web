@@ -34,7 +34,18 @@ export default function Profil() {
     // ... autres données ...
   ];
 
-  const [sauvegardes, setSauvegardes] = useState([]);
+  interface Sauvegarde {
+    intervention: string;
+    lieux: string;
+    date: string;
+  }
+  
+  // In your component, type the sauvegardes state with the interface
+  const [sauvegardes, setSauvegardes] = useState<Sauvegarde[]>([
+    { intervention: '23', lieux: '123 Rue de Sauvetage', date: '02/01/2023' },
+    { intervention: '22', lieux: '456 Rue de Sauvetage', date: '01/01/2023' }
+    // ... autres données ...
+  ]);
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
