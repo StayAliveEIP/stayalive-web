@@ -80,3 +80,17 @@
   max-height: 80vh; /* Pour éviter que le modal ne soit trop haut */
   overflow-y: auto; /* Pour ajouter un défilement si le contenu dépasse */
 }
+
+.logoutButton {
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  position: fixed; /* Fixe le bouton en haut de la page */
+  top: 11px; /* Ajustez selon votre navbar */
+  right: 170px; /* Distance du côté droit de l'écran */
+  color: white;
+  background-color: #c42f30;
+  width: 150px;
+  height: 40px;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}

@@ -11,31 +11,49 @@ export default function Profil() {
   const [profileData, setProfileData] = useState(null);
   const router = useRouter();
 
-  const sauvegardes = [
-    { intervention: '23', lieux: '123 Rue de Sauvetage', date: '02/01/2023' },
-    { intervention: '22', lieux: '456 Rue de Sauvetage', date: '01/01/2023' }
-    // ... autres données ...
-  ];
-
   const signalements = [
     { numero: '609', lieux: '123 Rue de Signalement', date: '12/01/2023' },
     { numero: '608', lieux: '456 Rue de Signalement', date: '10/01/2023' }
     // ... autres données ...
   ];
 
+  const [sauvegardes, setSauvegardes] = useState([]);
+
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     if (!token) {
-      router.push('/connexion'); // Redirige vers la page de connexion si aucun token n'est trouvé
+      router.push('/connexion');
     } else {
-      setAccessToken(token); // Stocke le token dans l'éta
+      setAccessToken(token);
       fetchProfileData(token);
+      fetchInterventionsHistory(token); // Appel de la nouvelle fonction pour récupérer les interventions
     }
   }, [router]);
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken'); // Supprime le token du stockage local
     router.push('/connexion'); // Redirige vers la page de connexion
+  };
+
+  const fetchInterventionsHistory = async (token: string) => {
+    try {
+      const response = await fetch('http://api.stayalive.fr:3000/rescuer/emergency/history', {
+        method: 'GET',
+        headers: {
+          'Authorization': `${token}`,
+          'Content-Type': 'application/json'
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setSauvegardes(data); // Mise à jour de l'état avec les données reçues
+      } else {
+        console.error('Erreur lors de la récupération de l historique des interventions');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la requête', error);
+    }
   };
 
   const fetchProfileData = async (token: string) => {
@@ -59,6 +77,8 @@ export default function Profil() {
       console.error('Erreur lors de la récupération des données du profil', error);
     }
   };
+
+  
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -201,28 +221,31 @@ export default function Profil() {
 
   return (
     <div>
-      <NavbarD isLoginPage={false} />
-      <div className={styles.buttonContainer}>
-  <button onClick={handleLogout} className={styles.logoutButton}>
-    Se déconnecter
-  </button>
-  <button onClick={openDeleteModal} className={styles.deleteAccountButton}>
-        Supprimer mon compte
-      </button>
+  <NavbarD isLoginPage={false} />
+  <div className={styles.accessTokenDisplay}>
+    Access Token: {accessToken}
+  </div>
+  <div className={styles.buttonContainer}>
+    <button onClick={handleLogout} className={styles.logoutButton}>
+      Se déconnecter
+    </button>
+    <button onClick={openDeleteModal} className={styles.deleteAccountButton}>
+      Supprimer mon compte
+    </button>
 
-      {showDeleteModal && (
-        <div className={styles.deleteModal}>
-          <p>Entrez votre mot de passe pour confirmer</p>
-          <input type="password" value={passwordForDeletion} onChange={handlePasswordChange} />
-          <button onClick={submitAccountDeletion}>Confirmer</button>
-          <button onClick={closeDeleteModal}>Annuler</button>
-        </div>
-      )}
-</div>
+    {showDeleteModal && (
+      <div className={styles.deleteModal}>
+        <p>Entrez votre mot de passe pour confirmer</p>
+        <input type="password" value={passwordForDeletion} onChange={handlePasswordChange} />
+        <button onClick={submitAccountDeletion}>Confirmer</button>
+        <button onClick={closeDeleteModal}>Annuler</button>
+      </div>
+    )}
+  </div>
 
-      <div className={styles.container}>
-  <div className={styles.leftSection}>
-  <div className={styles.photoSection}>
+  <div className={styles.container}>
+    <div className={styles.leftSection}>
+      <div className={styles.photoSection}>
         <Image
           src={selectedImage || "https://media.discordapp.net/attachments/1130401857890697285/1168505822792388678/telechargement_2.jpeg"}
           alt="Photo de profil"
@@ -232,63 +255,62 @@ export default function Profil() {
         />
         <button className={styles.changePhotoBtn} onClick={triggerFileInput}>Changer la photo</button>
         <button onClick={openPasswordModal} className={styles.changePasswordButton}>
-        Changer de mot de passe
-      </button>
+          Changer de mot de passe
+        </button>
         <input type="file" id="fileInput" style={{ display: 'none' }} onChange={handleImageChange} />
       </div>
-    
-    <div className={styles.infoWrapper}>
-  <div className={styles.infoSection}>
-    <h2>{profileData ? `${profileData.lastname} ${profileData.firstname}` : ''}</h2>
-    <div className={styles.detailLine}>
-      <span>Email: {profileData ? profileData.email.email : ''}</span>
-      <div className={styles.detailActions}>
-        <button className={styles.editButton} onClick={openEmailModal}>Modifier</button>
-        <div className={profileData && profileData.email.verified ? styles.verified : styles.notVerified}>
-          {profileData && profileData.email.verified ? 'Vérifié' : 'Non vérifié'}
+      
+      <div className={styles.infoWrapper}>
+        <div className={styles.infoSection}>
+          <h2>{profileData ? `${profileData.lastname} ${profileData.firstname}` : ''}</h2>
+          <div className={styles.detailLine}>
+            <span>Email: {profileData ? profileData.email.email : ''}</span>
+            <div className={styles.detailActions}>
+              <button className={styles.editButton} onClick={openEmailModal}>Modifier</button>
+              <div className={profileData && profileData.email.verified ? styles.verified : styles.notVerified}>
+                {profileData && profileData.email.verified ? 'Vérifié' : 'Non vérifié'}
+              </div>
+            </div>
+          </div>
+          <div className={styles.detailLine}>
+            <span>Téléphone: {profileData ? profileData.phone.phone : ''}</span>
+            <div className={styles.detailActions}>
+              <button className={styles.editButton} onClick={openPhoneModal}>Modifier</button>
+              <div className={profileData && profileData.phone.verified ? styles.verified : styles.notVerified}>
+                {profileData && profileData.phone.verified ? 'Vérifié' : 'Non vérifié'}
+              </div>
+            </div>
+          </div>
         </div>
+        {showEmailModal && (
+          <div className={styles.emailModal}>
+            <input type="email" value={newEmail} onChange={handleEmailChange} />
+            <button onClick={submitNewEmail}>Confirmer</button>
+            <button onClick={closeEmailModal}>Annuler</button>
+          </div>
+        )}
+        {showPhoneModal && (
+          <div className={styles.phoneModal}>
+            <input type="tel" value={newPhone} onChange={handlePhoneChange} />
+            <button onClick={submitNewPhone}>Confirmer</button>
+            <button onClick={closePhoneModal}>Annuler</button>
+          </div>
+        )}
+        {showPasswordModal && (
+          <div className={styles.passwordModal}>
+            <input type="password" value={oldPassword} onChange={handleOldPasswordChange} placeholder="Ancien mot de passe" />
+            <input type="password" value={newPassword} onChange={handleNewPasswordChange} placeholder="Nouveau mot de passe" />
+            <button onClick={submitNewPassword}>Confirmer</button>
+            <button onClick={closePasswordModal}>Annuler</button>
+          </div>
+        )}
       </div>
     </div>
-    <div className={styles.detailLine}>
-      <span>Téléphone: {profileData ? profileData.phone.phone : ''}</span>
-      <div className={styles.detailActions}>
-      <button className={styles.editButton} onClick={openPhoneModal}>Modifier</button>
-        <div className={profileData && profileData.phone.verified ? styles.verified : styles.notVerified}>
-          {profileData && profileData.phone.verified ? 'Vérifié' : 'Non vérifié'}
-        </div>
-      </div>
-    </div>
-  </div>
-  {showEmailModal && (
-        <div className={styles.emailModal}>
-          <input type="email" value={newEmail} onChange={handleEmailChange} />
-          <button onClick={submitNewEmail}>Confirmer</button>
-          <button onClick={closeEmailModal}>Annuler</button>
-        </div>
-      )}
-  {showPhoneModal && (
-        <div className={styles.phoneModal}>
-          <input type="tel" value={newPhone} onChange={handlePhoneChange} />
-          <button onClick={submitNewPhone}>Confirmer</button>
-          <button onClick={closePhoneModal}>Annuler</button>
-        </div>
-      )}
-  {showPasswordModal && (
-        <div className={styles.passwordModal}>
-          <input type="password" value={oldPassword} onChange={handleOldPasswordChange} placeholder="Ancien mot de passe" />
-          <input type="password" value={newPassword} onChange={handleNewPasswordChange} placeholder="Nouveau mot de passe" />
-          <button onClick={submitNewPassword}>Confirmer</button>
-          <button onClick={closePasswordModal}>Annuler</button>
-        </div>
-      )}
-</div>
-  </div>
 
-  <div className={styles.tablesWrapper}>
-  <div className={styles.tablesWrapper}>
-  <h2 className={styles.tableTitle}>Historique de vos Sauvetages</h2>
-  <div className={styles.tableContainer}>
-  <table>
+    <div className={styles.tablesWrapper}>
+      <h2 className={styles.tableTitle}>Historique de vos Sauvetages</h2>
+      <div className={styles.tableContainer}>
+        <table>
           <thead>
             <tr className={styles.tableHeader}>
               <th className={styles.tableCell}>Intervention</th>
@@ -306,11 +328,11 @@ export default function Profil() {
             ))}
           </tbody>
         </table>
-  </div>
-  
-  <h2 className={styles.tableTitle}>Historique de vos Signalements</h2>
-  <div className={styles.tableContainer}>
-  <table>
+      </div>
+      
+      <h2 className={styles.tableTitle}>Historique de vos Signalements</h2>
+      <div className={styles.tableContainer}>
+        <table>
           <thead>
             <tr className={styles.tableHeader}>
               <th className={styles.tableCell}>Numéro</th>
@@ -328,11 +350,10 @@ export default function Profil() {
             ))}
           </tbody>
         </table>
-  </div>
-</div>
-  </div>
-</div>
-<RescueCounter count={42} />
+      </div>
     </div>
+  </div>
+  <RescueCounter count={42} />
+</div>
   )
 }

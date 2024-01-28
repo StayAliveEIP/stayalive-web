@@ -1,78 +1,74 @@
 "use client";
+// Importations nécessaires
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import NavBarCenter from '../components/NavBarCenter';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import styles from './center.module.css';
-import { useState } from 'react';
 
+// Configuration du style du conteneur Google Map
 const containerStyle = {
   width: '100%',
   height: '700px'
 };
 
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+  intervention: Intervention | null;
+}
+
+// Coordonnées du centre de la carte
 const center = {
   lat: -3.745,
   lng: -38.523
 };
 
+// Énumération des statuts d'intervention
 enum InterventionStatus {
   EnCours = 'En cours',
   EnAttente = 'En attente',
   Termine = 'Terminé',
 }
 
-interface Props {
-  isOpen: boolean;
-  onClose: () => void;
-  intervention: Intervention | null; // Utilisez l'interface Intervention définie précédemment
-}
-
+// Interface pour les interventions
 interface Intervention {
-  id: number;
-  sauveteur: string;
-  adresse: string;
-  statut: InterventionStatus;
+  id: string;
+  status: InterventionStatus;
+  rescuerAssigned: {
+    id: string;
+    firstname: string;
+    lastname: string;
+    phone: string;
+  };
+  address: string;
+  info: string;
 }
 
-const interventions: Intervention[] = [
-  { id: 1, sauveteur: 'Matthieu Queru', adresse: 'Adresse 1', statut: InterventionStatus.EnCours },
-  { id: 2, sauveteur: 'Martin Leblancs', adresse: 'Adresse 2', statut: InterventionStatus.EnAttente },
-  { id: 3, sauveteur: 'Florian Damiot', adresse: 'Adresse 1', statut: InterventionStatus.EnCours },
-  { id: 4, sauveteur: 'Noel Varga', adresse: 'Adresse 2', statut: InterventionStatus.EnAttente },
-  { id: 5, sauveteur: 'Felix Buisson', adresse: 'Adresse 1', statut: InterventionStatus.EnCours },
-  { id: 6, sauveteur: 'Bastien Cantet', adresse: 'Adresse 2', statut: InterventionStatus.Termine },
-  // ... autres interventions
-];
-
-const getStatusClassName = (statut: InterventionStatus) => {
-  switch (statut) {
-    case InterventionStatus.EnCours:
-      return styles['status-en-cours'];
-    case InterventionStatus.EnAttente:
-      return styles['status-en-attente'];
-    case InterventionStatus.Termine:
-      return styles['status-termine'];
-    default:
-      return "";
-  }
-};
-
+// Composant pour le modal des détails d'une intervention
 const Modal: React.FC<Props> = ({ isOpen, onClose, intervention }) => {
   if (!isOpen || !intervention) return null;
+
+  // Vérifier si 'rescuerAssigned' est présent avant d'accéder à ses propriétés
+  const rescuerAssigned = intervention.rescuerAssigned || {};
+  const { firstname = '', lastname = '', phone = '' } = rescuerAssigned;
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
+  console.log(intervention);
   return (
     <div className="modalOverlay" onClick={handleOverlayClick}>
       <div className="modalContent">
-      <h2>Détails Intervention</h2>
-        <p>Nom et prénom du sauveteur: {intervention.sauveteur}</p>
-        <p>Numéro de téléphone du sauveteur: </p>
+        <h2>Détails Intervention</h2>
+        <p>Nom et prénom du sauveteur: {firstname} {lastname}</p>
+        <p>Numéro de téléphone du sauveteur: {phone}</p>
         <p>Numéro intervention: {intervention.id}</p>
-        <p>Statut intervention: {intervention.statut}</p>
-        <p>Adresse intervention: {intervention.adresse}</p>
+        <p>Statut intervention: {intervention.status}</p>
+        <p>Adresse intervention: {intervention.address}</p>
+        <p>Informations supplémentaires: {intervention.info}</p>
         <button>Chat en ligne</button>
         <button onClick={onClose}>Fermer</button>
       </div>
@@ -80,31 +76,71 @@ const Modal: React.FC<Props> = ({ isOpen, onClose, intervention }) => {
   );
 };
 
+// Composant principal pour la page du centre d'appel
 export default function Center() {
   const [selectedIntervention, setSelectedIntervention] = useState<Intervention | null>(null);
+  const [interventions, setInterventions] = useState<Intervention[]>([]);
+  const [accessToken, setAccessToken] = useState('');
+  const router = useRouter();
 
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      router.push('/connexion');
+    } else {
+      setAccessToken(token);
+      fetchInterventions(token);
+    }
+  }, [router]);
+
+  // Fonction pour charger les interventions depuis l'API
+  const fetchInterventions = async (token: string) => {
+    try {
+      const response = await fetch('http://api.stayalive.fr:3000/call-center/emergency', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setInterventions(data);
+        
+      } else {
+        console.error('Erreur lors du chargement des interventions');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des interventions', error);
+    }
+  };
+
+  // Fonction pour gérer le clic sur une ligne du tableau
   const handleRowClick = (intervention: Intervention) => {
-    console.log("Intervention clicked:", intervention);
     setSelectedIntervention(intervention);
   };
 
+  // Fonction pour gérer la fermeture du modal
   const handleCloseModal = () => {
     setSelectedIntervention(null);
   };
-  
+
+  // Fonction pour gérer la déconnexion
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    router.push('/connexion');
+  };
+
   return (
     <div>
       <NavBarCenter isLoginPage={false} />
-      <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-        >
-        </GoogleMap>
+      <button onClick={handleLogout} className={styles.logoutButton}>Déconnexion</button>
+      <LoadScript googleMapsApiKey="VOTRE_CLE_API_GOOGLE_MAPS">
+        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} />
       </LoadScript>
-      <div className="tableContainer"> {/* Classe pour centrer le tableau */}
-        <table className={styles.styledTable}> {/* Classe pour styliser le tableau */}
+      <div className="tableContainer">
+        <table className={styles.styledTable}>
           <thead>
             <tr>
               <th>Numéro intervention</th>
@@ -116,22 +152,21 @@ export default function Center() {
           <tbody>
             {interventions.map((intervention) => (
               <tr key={intervention.id} onClick={() => handleRowClick(intervention)}>
-                <td>{intervention.id}</td>
-                <td>{intervention.sauveteur}</td>
-                <td>{intervention.adresse}</td>
-                <td className={getStatusClassName(intervention.statut)}>
-  {intervention.statut}
-</td>
-              </tr>
+              <td>{intervention.id}</td>
+              <td>
+                {intervention.rescuerAssigned 
+                  ? `${intervention.rescuerAssigned.firstname} ${intervention.rescuerAssigned.lastname}`
+                  : 'Non assigné'}
+              </td>
+              <td>{intervention.address}</td>
+              <td>{intervention.status}</td>
+            </tr>
+            
             ))}
           </tbody>
         </table>
       </div>
-      <Modal
-        isOpen={!!selectedIntervention}
-        onClose={handleCloseModal}
-        intervention={selectedIntervention}
-      />
+      <Modal isOpen={!!selectedIntervention} onClose={handleCloseModal} intervention={selectedIntervention} />
     </div>
-  )
+  );
 }

@@ -5,27 +5,31 @@ import { FiArrowLeft } from 'react-icons/fi';
 import Link from 'next/link';
 import fetch from 'isomorphic-fetch';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const [etablissement, setEtablissement] = useState('');
-  const [poste, setPoste] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async () => {
     try {
-      console.log('etablissement', etablissement);
+      console.log('email', email);
       console.log('password', password);
-      const response = await fetch('mettre notre api', {
+      const response = await fetch('http://api.stayalive.fr:3000/call-center/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ etablissement, password, poste })
+        body: JSON.stringify({ email, password })
       });
 
       if (response.ok) {
-        // Connexion réussie, effectuez les actions nécessaires ici
         console.log('Connexion réussie !');
+        const data = await response.json();
+        console.log('Token récupéré:', data.accessToken);
+        localStorage.setItem('accessToken', data.accessToken); // Stockage du token
+        router.push('/center'); // Redirection vers le tableau de bord
       } else {
         // Gérez les erreurs ici
         console.error('Erreur lors de la connexion');
@@ -47,19 +51,13 @@ export default function Home() {
           </div>
           <div className={styles.formContainer}>
             <div className={styles.formGroup}>
-              <label htmlFor="etablissement" className={styles.label}>Numéro d&apos;établissement</label>
+              <label htmlFor="email" className={styles.label}>Email</label>
               <input
-                type="text"
-                id="etablissement"
+                type="email"
+                id="email"
                 className={styles.input}
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="poste" className={styles.label}>Numéro de poste</label>
-              <input
-                type="text"
-                id="poste"
-                className={styles.input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className={styles.formGroup}>
@@ -68,6 +66,8 @@ export default function Home() {
                 type="password"
                 id="password"
                 className={styles.input}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className={styles.forgotPassword}>

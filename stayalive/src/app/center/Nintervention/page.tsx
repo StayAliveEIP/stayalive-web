@@ -1,49 +1,50 @@
 "use client";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import NavBarCenter from '../../components/NavBarCenter';
 import styles from './Nintervention.module.css';
 import Link from 'next/link';
 import { FiArrowLeft } from 'react-icons/fi';
-import { useState } from 'react'; // Importez useState depuis React
-
-
 
 export default function Center() {
-  const [isCguChecked, setIsCguChecked] = useState(false);
-  const [email, setEmail] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
+  const [info, setInfo] = useState('');
+  const [address, setAddress] = useState('');
+  const [accessToken, setAccessToken] = useState('');
+  const router = useRouter();
 
-  const handleCguCheckboxChange = () => {
-    setIsCguChecked(!isCguChecked);
-  };
-
-  const handleSignupButtonClick = async () => {
-    if (isCguChecked) {
-      const response = await fetch('http://api.stayalive.fr:3000/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email,
-          firstname,
-          lastname,
-          password,
-          phone
-        })
-        
-      });
-      if (response.ok) {
-        console.log('Inscription réussie !');
-      } else {
-        console.error('Erreur lors de la connexion');
-      }
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    console.log('Token récupéré:', token);
+    if (token) {
+      setAccessToken(token);
     } else {
-      console.log('Veuillez accepter les CGU pour vous inscrire.');
+      router.push('/connexion');
+    }
+  }, [router]);
+  
+
+  const handleCreateInterventionClick = async () => {
+    if (!accessToken) {
+      console.error('Token non disponible');
+      return;
+    }
+    console.log(accessToken);
+    const response = await fetch('http://api.stayalive.fr:3000/call-center/emergency', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ info, address })
+    });
+
+    if (response.ok) {
+      console.log('Intervention créée avec succès !');
+    } else {
+      console.error('Erreur lors de la création de l’intervention');
     }
   };
+
   return (
     <div>
       <NavBarCenter isLoginPage={false} />
@@ -54,30 +55,14 @@ export default function Center() {
           </div>
           <div className={styles.formContainer}>
             <div className={styles.formGroup}>
-              <label htmlFor="text" className={styles.label}>
-                Nom
-              </label>
-              <input type="lastname" id="lastname" className={styles.input} />
+              <label htmlFor="info" className={styles.label}>Informations</label>
+              <input type="text" id="info" className={styles.input} value={info} onChange={(e) => setInfo(e.target.value)} />
             </div>
             <div className={styles.formGroup}>
-              <label htmlFor="text" className={styles.label}>
-                Prénom
-              </label>
-              <input type="firstname" id="firstname" className={styles.input} />
+              <label htmlFor="address" className={styles.label}>Adresse</label>
+              <input type="text" id="address" className={styles.input} value={address} onChange={(e) => setAddress(e.target.value)} />
             </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="text" className={styles.label}>
-                Téléphone
-              </label>
-              <input type="phone" id="phone" className={styles.input} />
-            </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="text" className={styles.label}>
-                Adresse
-              </label>
-              <input type="Adresse" id="adresse" className={styles.input} />
-            </div>
-            <button className={styles.button} onClick={handleSignupButtonClick}>
+            <button className={styles.button} onClick={handleCreateInterventionClick}>
               Faire la demande
             </button>
             <div className={styles.returnButton}>
@@ -92,5 +77,5 @@ export default function Center() {
         </div>
       </div>
     </div>
-  )
+  );
 }
