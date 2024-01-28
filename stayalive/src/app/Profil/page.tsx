@@ -105,7 +105,7 @@ export default function Profil() {
   const openEmailModal = () => setShowEmailModal(true);
   const closeEmailModal = () => setShowEmailModal(false);
 
-  const handleEmailChange = (e) => setNewEmail(e.target.value);
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setNewEmail(e.target.value);
 
   const submitNewEmail = async () => {
     try {
