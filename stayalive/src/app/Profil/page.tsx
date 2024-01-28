@@ -200,8 +200,9 @@ export default function Profil() {
   const openPasswordModal = () => setShowPasswordModal(true);
   const closePasswordModal = () => setShowPasswordModal(false);
 
-  const handleOldPasswordChange = (e) => setOldPassword(e.target.value);
-  const handleNewPasswordChange = (e) => setNewPassword(e.target.value);
+  const handleOldPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setOldPassword(e.target.value);
+  const handleNewPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setNewPassword(e.target.value);
+  
 
   const submitNewPassword = async () => {
     try {
