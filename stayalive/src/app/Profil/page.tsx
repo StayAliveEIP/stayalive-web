@@ -136,7 +136,7 @@ export default function Profil() {
   const openPhoneModal = () => setShowPhoneModal(true);
   const closePhoneModal = () => setShowPhoneModal(false);
 
-  const handlePhoneChange = (e) => setNewPhone(e.target.value);
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => setNewPhone(e.target.value);
 
   const submitNewPhone = async () => {
     try {
