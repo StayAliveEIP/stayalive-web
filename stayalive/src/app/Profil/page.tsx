@@ -91,8 +91,12 @@ export default function Profil() {
   
 
   const triggerFileInput = () => {
-    document.getElementById('fileInput').click();
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput) {
+      fileInput.click();
+    }
   };
+  
 
 
   const [showEmailModal, setShowEmailModal] = useState(false);
