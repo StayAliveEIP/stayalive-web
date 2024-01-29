@@ -19,7 +19,7 @@ export default function Home() {
     setSuccessMessage(''); // Réinitialiser le message de réussite
   
     try {
-      const response = await fetch('http://api.stayalive.fr:3000/rescuer/forgot-password/link?email=matthieuqueru78@gmail.com', {
+      const response = await fetch('https://api.stayalive.fr/rescuer/forgot-password/link?email=matthieuqueru78@gmail.com', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

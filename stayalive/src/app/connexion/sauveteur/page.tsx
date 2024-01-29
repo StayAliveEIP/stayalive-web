@@ -16,7 +16,7 @@ export default function Home() {
     try {
       console.log('email', email);
       console.log('password', password);
-      const response = await fetch('http://api.stayalive.fr:3000/rescuer/auth/login', {
+      const response = await fetch('https://api.stayalive.fr/rescuer/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -26,7 +26,7 @@ export default function Home() {
     console.log('Password:', password);
 
     if (isCguChecked) {
-      const response = await fetch('http://api.stayalive.fr:3000/rescuer/auth/register', {
+      const response = await fetch('https://api.stayalive.fr/rescuer/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

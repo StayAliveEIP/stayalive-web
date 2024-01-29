@@ -96,7 +96,7 @@ export default function Center() {
   // Fonction pour charger les interventions depuis l'API
   const fetchInterventions = async (token: string) => {
     try {
-      const response = await fetch('http://api.stayalive.fr:3000/call-center/emergency', {
+      const response = await fetch('https://api.stayalive.fr/call-center/emergency', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,

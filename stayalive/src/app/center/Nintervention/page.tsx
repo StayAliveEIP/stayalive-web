@@ -29,7 +29,7 @@ export default function Center() {
       return;
     }
     console.log(accessToken);
-    const response = await fetch('http://api.stayalive.fr:3000/call-center/emergency', {
+    const response = await fetch('https://api.stayalive.fr/call-center/emergency', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${accessToken}`,

@@ -16,7 +16,7 @@ export default function Home() {
     try {
       console.log('email', email);
       console.log('password', password);
-      const response = await fetch('http://api.stayalive.fr:3000/call-center/auth/login', {
+      const response = await fetch('https://api.stayalive.fr/call-center/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

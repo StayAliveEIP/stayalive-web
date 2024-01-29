@@ -65,7 +65,7 @@ export default function Profil() {
 
   const fetchInterventionsHistory = async (token: string) => {
     try {
-      const response = await fetch('http://api.stayalive.fr:3000/rescuer/emergency/history', {
+      const response = await fetch('https://api.stayalive.fr/rescuer/emergency/history', {
         method: 'GET',
         headers: {
           'Authorization': `${token}`,
