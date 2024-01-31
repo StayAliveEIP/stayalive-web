@@ -35,17 +35,15 @@ export default function Profil() {
   ];
 
   interface Sauvegarde {
-    intervention: string;
-    lieux: string;
-    date: string;
+    id: string;
+    status: string;
+    address: string;
+    info: string;
   }
   
+  
   // In your component, type the sauvegardes state with the interface
-  const [sauvegardes, setSauvegardes] = useState<Sauvegarde[]>([
-    { intervention: '23', lieux: '123 Rue de Sauvetage', date: '02/01/2023' },
-    { intervention: '22', lieux: '456 Rue de Sauvetage', date: '01/01/2023' }
-    // ... autres données ...
-  ]);
+  const [sauvegardes, setSauvegardes] = useState<Sauvegarde[]>([]);
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
@@ -75,7 +73,7 @@ export default function Profil() {
 
       if (response.ok) {
         const data = await response.json();
-        setSauvegardes(data); // Mise à jour de l'état avec les données reçues
+        setSauvegardes(data);
       } else {
         console.error('Erreur lors de la récupération de l historique des interventions');
       }
@@ -87,7 +85,7 @@ export default function Profil() {
   const fetchProfileData = async (token: string) => {
     try {
       console.log('token', token);
-      const response = await fetch('http://api.stayalive.fr:3000/rescuer/account', { // Remplacez par l'URL de votre API
+      const response = await fetch('https://api.stayalive.fr/rescuer/account', { // Remplacez par l'URL de votre API
         method: 'GET',
         headers: {
           'Authorization': `${token}`,
@@ -137,7 +135,7 @@ export default function Profil() {
 
   const submitNewEmail = async () => {
     try {
-      const response = await fetch('http://api.stayalive.fr:3000/rescuer/account/change-email', {
+      const response = await fetch('https://api.stayalive.fr/rescuer/account/change-email', {
         method: 'POST',
         headers: {
           'Authorization': `${accessToken}`,
@@ -168,7 +166,7 @@ export default function Profil() {
 
   const submitNewPhone = async () => {
     try {
-      const response = await fetch('http://api.stayalive.fr:3000/rescuer/account/change-phone', {
+      const response = await fetch('https://api.stayalive.fr/rescuer/account/change-phone', {
         method: 'POST',
         headers: {
           'Authorization': `${accessToken}`,
@@ -199,7 +197,7 @@ export default function Profil() {
 
   const submitAccountDeletion = async () => {
     try {
-      const response = await fetch('http://api.stayalive.fr:3000/rescuer/account', {
+      const response = await fetch('https://api.stayalive.fr/rescuer/account', {
         method: 'DELETE',
         headers: {
           'Authorization': `${accessToken}`,
@@ -211,6 +209,7 @@ export default function Profil() {
       if (response.ok) {
         // Gérez la suppression réussie du compte ici
         closeDeleteModal();
+        handleLogout();
         // Redirigez ou déconnectez l'utilisateur
       } else {
         // Gérez l'erreur ici
@@ -234,7 +233,7 @@ export default function Profil() {
 
   const submitNewPassword = async () => {
     try {
-      const response = await fetch('http://api.stayalive.fr:3000/rescuer/account/change-password', {
+      const response = await fetch('https://api.stayalive.fr/rescuer/account/change-password', {
         method: 'POST',
         headers: {
           'Authorization': `${accessToken}`,
@@ -257,9 +256,6 @@ export default function Profil() {
   return (
     <div>
   <NavbarD isLoginPage={false} />
-  <div className={styles.accessTokenDisplay}>
-    Access Token: {accessToken}
-  </div>
   <div className={styles.buttonContainer}>
     <button onClick={handleLogout} className={styles.logoutButton}>
       Se déconnecter
@@ -348,20 +344,20 @@ export default function Profil() {
         <table>
           <thead>
             <tr className={styles.tableHeader}>
-              <th className={styles.tableCell}>Intervention</th>
+              <th className={styles.tableCell}>Id Intervention</th>
               <th className={styles.tableCell}>Lieux</th>
-              <th className={styles.tableCell}>Date</th>
+              <th className={styles.tableCell}>Information</th>
             </tr>
           </thead>
           <tbody>
-            {sauvegardes.map((sauvetage, index) => (
-              <tr key={index} className={styles.tableRow}>
-                <td className={styles.tableCell}>{sauvetage.intervention}</td>
-                <td className={styles.tableCell}>{sauvetage.lieux}</td>
-                <td className={styles.tableCell}>{sauvetage.date}</td>
-              </tr>
-            ))}
-          </tbody>
+              {sauvegardes.map((sauvetage) => (
+                <tr key={sauvetage.id} className={styles.tableRow}>
+                  <td className={styles.tableCell}>{sauvetage.id}</td>
+                  <td className={styles.tableCell}>{sauvetage.address}</td>
+                  <td className={styles.tableCell}>{sauvetage.info}</td>
+                </tr>
+              ))}
+            </tbody>
         </table>
       </div>
       
@@ -388,7 +384,6 @@ export default function Profil() {
       </div>
     </div>
   </div>
-  <RescueCounter count={42} />
 </div>
   )
 }

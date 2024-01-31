@@ -44,6 +44,17 @@ export default function Dashboard() {
     }]
   }), []);
 
+  interface Sauvegarde {
+    id: string;
+    status: string;
+    address: string;
+    info: string;
+  }
+  
+  
+  // In your component, type the sauvegardes state with the interface
+  const [sauvegardes, setSauvegardes] = useState<Sauvegarde[]>([]);
+
   const options = useMemo(() => ({
     scales: {
       y: {
@@ -58,6 +69,7 @@ export default function Dashboard() {
       router.push('/connexion');
     } else {
       setAccessToken(token);
+      fetchInterventionsHistory(token);
     }
 
     Chart.register(BarController, BarElement, CategoryScale, LinearScale);
@@ -73,12 +85,30 @@ export default function Dashboard() {
     }
   }, [data, options, router]);
 
+  const fetchInterventionsHistory = async (token: string) => {
+    try {
+      const response = await fetch('https://api.stayalive.fr/rescuer/emergency/history', {
+        method: 'GET',
+        headers: {
+          'Authorization': `${token}`,
+          'Content-Type': 'application/json'
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setSauvegardes(data);
+      } else {
+        console.error('Erreur lors de la récupération de l historique des interventions');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la requête', error);
+    }
+  };
+
   return (
     <div>
       <NavbarD isLoginPage={false} />
-      <div className={styles.accessTokenDisplay}>
-        Access Token: {accessToken}
-      </div>
       <div className={styles['card-container']}>
     <div className={`${styles.card}`}>
     <div className={styles['card-image']}>
@@ -116,6 +146,27 @@ export default function Dashboard() {
       <button className={styles['card-button']}>Voir plus</button>
     </div>
     </div>
+    <h2 className={styles.tableTitle}>Historique de vos Sauvetages</h2>
+      <div className={styles.tableContainer}>
+        <table>
+          <thead>
+            <tr className={styles.tableHeader}>
+              <th className={styles.tableCell}>Intervention</th>
+              <th className={styles.tableCell}>Lieux</th>
+              <th className={styles.tableCell}>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+              {sauvegardes.map((sauvetage) => (
+                <tr key={sauvetage.id} className={styles.tableRow}>
+                  <td className={styles.tableCell}>{sauvetage.id}</td>
+                  <td className={styles.tableCell}>{sauvetage.address}</td>
+                  <td className={styles.tableCell}>{sauvetage.info}</td>
+                </tr>
+              ))}
+            </tbody>
+        </table>
+      </div>
     <div className={styles['achievement-section']}>
         <h1 className={styles['achievement-title']}>Vos Succès</h1>
         <div className={styles['achievement-list']}>
@@ -136,14 +187,6 @@ export default function Dashboard() {
           {defibrillatorCount}
         </div>
       </div>
-        <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-        >
-        </GoogleMap>
-      </LoadScript>
     </div>
   );
 }

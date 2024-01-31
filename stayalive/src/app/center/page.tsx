@@ -136,9 +136,9 @@ export default function Center() {
     <div>
       <NavBarCenter isLoginPage={false} />
       <button onClick={handleLogout} className={styles.logoutButton}>Déconnexion</button>
-      <LoadScript googleMapsApiKey="VOTRE_CLE_API_GOOGLE_MAPS">
+      {/* <LoadScript googleMapsApiKey="VOTRE_CLE_API_GOOGLE_MAPS">
         <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} />
-      </LoadScript>
+      </LoadScript> */}
       <div className="tableContainer">
         <table className={styles.styledTable}>
           <thead>

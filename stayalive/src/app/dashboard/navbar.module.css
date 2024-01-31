@@ -121,3 +121,40 @@
   margin-top: 10px;
 }
 
+.tableTitle {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.tablesWrapper {
+  flex: 1; /* Prend tout l'espace restant après les autres éléments */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tableContainer {
+  margin-top: 20px;
+  border: 1px solid #c42f30;
+  border-collapse: collapse;
+  width: max-content; /* Cela garantit que la largeur du tableau est dictée par son contenu */
+  margin-left: auto; /* Centre horizontalement */
+  margin-right: auto; /* Centre horizontalement */
+}
+
+
+.tableHeader {
+  background-color: #edb4b4;
+}
+
+.tableRow:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.tableCell {
+  padding: 8px 120px;
+  border: 1px solid #e0e0e0;
+}
