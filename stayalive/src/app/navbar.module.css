@@ -217,59 +217,6 @@
   text-align: center;
 }
 
-.contactContainer {
-  padding: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-blend-mode: overlay;
-  background-color: rgba(255, 255, 255, 0.6);  /* Ceci permet d'obtenir une opacité de 40% pour l'image */
-}
-
-.contactTitle {
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  color: #E9E9E9;
-}
-
-.contactForm {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  max-width: 500px;
-}
-
-.contactInput,
-.contactTextarea {
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-.contactTextarea {
-  resize: vertical;
-  height: 150px;
-}
-
-.contactButton {
-  padding: 0.5rem 1rem;
-  background-color: #E22723;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.contactButton:hover {
-  background-color: #6c0200;
-}
-
 .footer {
   background-color: #6c0200;
   color: #fff;

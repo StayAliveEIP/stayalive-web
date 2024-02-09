@@ -1,0 +1,169 @@
+.teamContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .memberCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .memberImage {
+    border-radius: 50%;
+  }
+  
+  .memberName {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .memberRole {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .memberDescription {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .teamTitle {
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    text-align: center;
+    background: linear-gradient(-40deg, #8d3131, #ff0000);
+    margin-top: 1rem;
+    background-size: 100%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .teamTitle {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .timelineContainer {
+    margin: 4rem 0;
+    position: relative;
+    padding: 0 2rem;
+  }
+  
+  .timelineEvent {
+    display: flex;
+    justify-content: flex-start; /* Commence à gauche par défaut */
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+  
+  .timelineEvent.right .timelineContent {
+    order: -1; /* Change l'ordre pour les événements à droite */
+    text-align: right;
+  }
+  
+  .timelineMarker {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #c42f30;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .timelineContent {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 4rem;
+    position: relative;
+    z-index: 1; /* S'assure que le contenu est au-dessus de la ligne */
+  }
+  
+  .timelineMarker, .timelineContainer::before {
+    z-index: 0; /* Marqueurs et ligne derrière les cartes */
+  }
+  
+  
+  .timelineTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #c42f30;
+  }
+  
+  .timelineDate {
+    font-style: italic;
+  }
+  
+  .timelineDescription {
+    margin-top: 0.5rem;
+  }
+  
+  .contactContainer {
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-blend-mode: overlay;
+    background-color: rgba(255, 255, 255, 0.6);  /* Ceci permet d'obtenir une opacité de 40% pour l'image */
+  }
+  
+  .contactTitle {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #c42f30;
+  }
+  
+  .contactForm {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 500px;
+  }
+  
+  .contactInput,
+  .contactTextarea {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .contactTextarea {
+    resize: vertical;
+    height: 150px;
+  }
+  
+  .contactButton {
+    padding: 0.5rem 1rem;
+    background-color: #E22723;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .contactButton:hover {
+    background-color: #6c0200;
+  }

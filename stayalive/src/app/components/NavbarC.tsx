@@ -34,7 +34,7 @@ const Navbar: React.FC<{ isLoginPage: boolean }> = ({ isLoginPage }) => {
           <a href="/#presentationTarget">
             <button className={`${styles['white-button']} ${styles['button-transition']}`}>Présentation</button>
           </a>
-          <a href="/#aboutTarget">
+          <a href="/theteam">
             <button className={`${styles['white-button']} ${styles['button-transition']}`}>A propos</button>
           </a>
         </div>

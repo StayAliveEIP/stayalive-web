@@ -36,16 +36,6 @@ export default function Home() {
           <p className={styles.text13}>Vous pouvez rejoindre la communauté !</p>
           <div className={styles.informationContainer2}></div>
           <Image src="https://media.discordapp.net/attachments/930018108465348618/1166277087846473769/CleanShot_2023-10-24_at_16.28.022x.png?ex=6549e72e&is=6537722e&hm=15920d589c4c2c1ecf90ef2d24bd9e5c724c2f9f57131f4ac9fa66c13f6f144d&=&width=2592&height=1100" className={styles.image4} alt="Description de l'image" width="1942" height="10" />
-          <div className={styles.contactContainer} style={{ backgroundImage: `url('https://media.discordapp.net/attachments/1130401857890697285/1155854707991003156/mockupStayAlive2.png?width=2592&height=1084')` }}>
-            <h2 className={styles.contactTitle}>Contactez-nous</h2>
-            <form className={styles.contactForm}>
-              <input type="text" className={styles.contactInput} placeholder="Nom" required />
-              <input type="email" className={styles.contactInput} placeholder="Email" required />
-              <input type="text" className={styles.contactInput} placeholder="Sujet" required />
-              <textarea className={styles.contactTextarea} placeholder="Votre message" required></textarea>
-              <button type="submit" className={styles.contactButton}>Envoyer</button>
-            </form>
-          </div>
           <footer className={styles.footer} id="aboutTarget">
       <div className={styles.footerContent}>
         <div className={styles.footerLinks}>
