@@ -4,7 +4,6 @@ import styles from './connexion.module.css';
 import { FiArrowLeft } from 'react-icons/fi';
 import Link from 'next/link';
 import { useState } from 'react';
-import Image from 'next/image';
 
 export default function Home() {
   const [isCguChecked, setIsCguChecked] = useState(false);
@@ -54,63 +53,29 @@ export default function Home() {
   return (
     <div>
       <Navbar isLoginPage={false} />
-      <div className={styles.pageContainer}>
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <div className={styles.headerContent}>Création de Compte</div>
-          </div>
-          <div className={styles.formContainer}>
-            <div className={styles.formGroup}>
+      <div className="max-w-sm mx-auto my-10 bg-white rounded-lg shadow-md">
+        <div className="bg-gray-700 text-white text-xl font-semibold py-4 px-6 rounded-t-lg">Création de Compte</div>
+        <form className="space-y-6 py-6 px-8">
+          <div className={styles.formGroup}>
               <label htmlFor="email" className={styles.label}>Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                className={styles.input} 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-              />
+              <input type="email" id="email" className={styles.input} value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="lastname" className={styles.label}>Nom</label>
-              <input 
-                type="text" 
-                id="lastname" 
-                className={styles.input} 
-                value={lastname} 
-                onChange={(e) => setLastname(e.target.value)} 
-              />
+              <input type="text" id="lastname" className={styles.input} value={lastname} onChange={(e) => setLastname(e.target.value)} />
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="firstname" className={styles.label}>Prénom</label>
-              <input 
-                type="text" 
-                id="firstname" 
-                className={styles.input} 
-                value={firstname} 
-                onChange={(e) => setFirstname(e.target.value)} 
-              />
+              <input type="text" id="firstname" className={styles.input} value={firstname} onChange={(e) => setFirstname(e.target.value)} />
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="phone" className={styles.label}>Téléphone</label>
-              <input 
-                type="text" 
-                id="phone" 
-                className={styles.input} 
-                value={phone} 
-                onChange={(e) => setPhone(e.target.value)} 
-              />
+              <input type="text" id="phone" className={styles.input} value={phone} onChange={(e) => setPhone(e.target.value)} />
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="password" className={styles.label}>Mot de passe</label>
-              <input 
-                type="password" 
-                id="password" 
-                className={styles.input} 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-              />
+              <input type="password" id="password" className={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
-            {/* Assurez-vous d'ajouter la logique pour confirmer le mot de passe si nécessaire */}
             <div className={styles.cguCheckbox} onClick={handleCguCheckboxChange}>
               <label className={styles.cguLabel}>
                 <input 
@@ -121,9 +86,11 @@ export default function Home() {
                 J&apos;accepte les <span className={styles.cguText}>CGU</span>
               </label>
             </div>
-            <button className={styles.button} onClick={handleSignupButtonClick}>
+            <div className="flex justify-center">
+            <button className="bg-red-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-red-700" onClick={handleSignupButtonClick} type="button">
               S&apos;inscrire
             </button>
+            </div>
             <div className={styles.returnButton}>
               <Link href="/inscription">
                 <button className={styles.returnButtonContent}>
@@ -132,8 +99,7 @@ export default function Home() {
                 </button>
               </Link>
             </div>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   );

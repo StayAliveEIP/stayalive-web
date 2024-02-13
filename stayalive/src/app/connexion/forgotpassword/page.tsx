@@ -78,14 +78,10 @@ export default function Home() {
   return (
 <div>
   <Navbar isLoginPage={true} />
-  <div className={styles.pageContainer}>
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.headerContent}>
-          Récupération du mot de passe
-        </div>
-      </div>
-      <div className={styles.formContainer}>
+
+  <div className="max-w-sm mx-auto my-10 bg-white rounded-lg shadow-md">
+        <div className="bg-gray-700 text-white text-xl font-semibold py-4 px-6 rounded-t-lg">Récupération du mot de passe</div>
+        <form className="space-y-6 py-6 px-8">
         <div className={styles.formGroup}>
           <label htmlFor="email" className={styles.label}>Email</label>
           <input
@@ -96,9 +92,12 @@ export default function Home() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button className={styles.button} onClick={handleSubmit}>
+
+        <div className="flex justify-center">
+        <button className="bg-red-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-red-700" onClick={handleSubmit} type='button'>
           Envoyer le mail de récupération
         </button>
+        </div>
         <div className={styles.returnButton}>
           <Link href="/connexion">
             <button className={styles.returnButtonContent}>
@@ -107,10 +106,9 @@ export default function Home() {
             </button>
           </Link>
         </div>
+        </form>
       </div>
-    </div>
-  </div>
-  {isLoading && (
+      {isLoading && (
     <div className={styles.loadingAnimation}>
       {'Chargement...'.split('').map((char, index) => (
         <span key={index} className={`${styles.char} ${styles['char' + index]}`}>{char}</span>

@@ -31,16 +31,13 @@ const Navbar: React.FC<{ isLoginPage: boolean }> = ({ isLoginPage }) => {
           <a href="/">
           <button className={`${styles['white-button']} ${styles['button-transition']}`}>Acceuil</button>
           </a>
-          <a href="/#presentationTarget">
-            <button className={`${styles['white-button']} ${styles['button-transition']}`}>Présentation</button>
-          </a>
           <a href="/theteam">
             <button className={`${styles['white-button']} ${styles['button-transition']}`}>A propos</button>
           </a>
         </div>
       </div>
       <div className={styles['login-button']}>
-        <Link href={isLoginPage ? "/inscription" : "/connexion"}>
+        <Link href={isLoginPage ? "/inscription/sauveteur" : "/connexion"}>
           <button
             className={buttonClass}
             onClick={handleButtonClick}

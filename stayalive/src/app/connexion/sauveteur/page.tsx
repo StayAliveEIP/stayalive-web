@@ -40,15 +40,11 @@ export default function Home() {
   return (
     <div>
       <Navbar isLoginPage={true} />
-      <div className={styles.pageContainer}>
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <div className={styles.headerContent}>
-              Connexion
-            </div>
-          </div>
-          <div className={styles.formContainer}>
-            <div className={styles.formGroup}>
+
+      <div className="max-w-sm mx-auto my-10 bg-white rounded-lg shadow-md">
+        <div className="bg-gray-700 text-white text-xl font-semibold py-4 px-6 rounded-t-lg">Connexion</div>
+        <form className="space-y-6 py-6 px-8">
+        <div className={styles.formGroup}>
               <label htmlFor="email" className={styles.label}>Email</label>
               <input
                 type="email"
@@ -76,19 +72,20 @@ export default function Home() {
             <div className={styles.buttonsContainer}>
               {/* Les boutons des réseaux sociaux ici */}
             </div>
-            <button className={styles.button} onClick={handleSubmit}>
+            <div className="flex justify-center">
+              <button className="bg-red-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-red-700" onClick={handleSubmit} type='button'>
               Se connecter
             </button>
+            </div>
             <div className={styles.returnButton}>
-              <Link href="/inscription">
+              <Link href="/connexion">
                 <button className={styles.returnButtonContent}>
                   <FiArrowLeft className={styles.returnButtonIcon} />
                   <span className={styles.returnButtonText}>Retour</span>
                 </button>
               </Link>
             </div>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   );

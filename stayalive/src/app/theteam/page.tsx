@@ -1,9 +1,8 @@
 import React from 'react';
 import Navbar from './../components/NavbarC';
-import styles from './TheTeam.module.css'; // Assurez-vous de créer ce fichier CSS
+import styles from './TheTeam.module.css';
 import Image from 'next/image';
 
-// Données de l'équipe pour l'exemple
 const teamMembers = [
   {
     name: 'Matthieu Queru',
@@ -41,7 +40,6 @@ const teamMembers = [
     description: 'Spécialiste NextJS.',
     image: 'https://media.discordapp.net/attachments/1130401857890697285/1205439819153547265/94faf3b55894aa411e8357335ae0ff54.png?ex=65d86050&is=65c5eb50&hm=4195947dde5439740ce44a5ffb7ae198f3da81a38e6c0a5276cfe7098e453e50&=&format=webp&quality=lossless&width=512&height=512',
   },
-  // Ajoutez d'autres membres ici
 ];
 
 const timelineEvents = [
@@ -88,8 +86,8 @@ export default function TheTeam() {
             <Image
               src={member.image}
               alt={member.name}
-              width={150} // Ajustez selon vos besoins
-              height={150} // Ajustez selon vos besoins
+              width={150}
+              height={150}
               className={styles.memberImage}
             />
             <h3 className={styles.memberName}>{member.name}</h3>

@@ -26,23 +26,19 @@ export default function Home() {
   return (
     <div>
       <Navbar isLoginPage={true} />
-      <div className={styles.pageContainer}>
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <div className={styles.headerContent}>
-              Connexion
-            </div>
-          </div>
-          <div className={styles.subheader}>
-            En tant que:
-          </div>
-          <Link href="/connexion/etablissement">
-            <button className={buttonClass} onClick={handleButtonClick} >
+      <div className="max-w-sm mx-auto my-8 shadow-lg">
+      <div className="rounded-t-lg bg-gray-700 p-6 text-center text-white">
+        <h1 className="text-2xl font-semibold">Connexion</h1>
+      </div>
+      <div className="rounded-b-lg bg-white p-6 space-y-6 text-center space-x-1">
+        <h2 className="text-center text-lg font-medium">En tant que:</h2>
+        <Link href="/connexion/etablissement">
+            <button className="w-full bg-red-600 text-white py-3 rounded-md shadow-md hover:bg-red-700 max-w-[150px]" onClick={handleButtonClick} >
               Etablissement
             </button>
           </Link>
           <Link href="/connexion/sauveteur">
-            <button className={buttonClass} onClick={handleButtonClick}>
+            <button className="w-full bg-red-600 text-white py-3 rounded-md shadow-md hover:bg-red-700 max-w-[150px]" onClick={handleButtonClick}>
               Sauveteur
             </button>
           </Link>
@@ -54,8 +50,8 @@ export default function Home() {
               </button>
             </Link>
           </div>
-        </div>
       </div>
+    </div>
     </div>
   );
 }
