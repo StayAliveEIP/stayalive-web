@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './../components/NavbarC';
 import styles from './TheTeam.module.css';
 import Image from 'next/image';
+import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
 
 const teamMembers = [
   {
@@ -80,6 +81,42 @@ export default function TheTeam() {
     <div>
       <Navbar isLoginPage={false} />
       <h1 className={styles.teamTitle}>Une équipe de 6 développeurs</h1>
+      {/* <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem'}}>
+        {teamMembers.map((member, index) => (
+          <CardContainer key={index}>
+          <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[15rem] sm:h-[20rem] h-auto rounded-xl p-6 border  ">
+            <CardItem
+              translateZ="50"
+              className="text-xl font-bold text-neutral-600 dark:text-white"
+            >
+              {member.name}
+            </CardItem>
+            <CardItem
+              translateZ="50"
+              className="text-l font-medium text-neutral-600 dark:text-white"
+            >
+              {member.role}
+            </CardItem>
+            <CardItem
+              as="p"
+              translateZ="60"
+              className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+            >
+              {member.description}
+            </CardItem>
+            <CardItem translateZ="100" className="w-32 mt-4">
+              <Image
+                src={member.image}
+                height="1000"
+                width="1000"
+                className="h-50 w-full object-cover group-hover/card:shadow-xl rounded-full"
+                alt="thumbnail"
+              />
+            </CardItem>
+          </CardBody>
+        </CardContainer>
+        ))}
+      </div> */}
       <div className={styles.teamContainer}>
         {teamMembers.map((member, index) => (
           <div key={index} className={styles.memberCard}>
@@ -109,16 +146,22 @@ export default function TheTeam() {
           </div>
         ))}
       </div>
-      <div className={styles.contactContainer} style={{ backgroundImage: `url('https://media.discordapp.net/attachments/1130401857890697285/1155854707991003156/mockupStayAlive2.png?width=2592&height=1084')` }}>
-            <h2 className={styles.contactTitle}>Contactez-nous</h2>
-            <form className={styles.contactForm}>
-              <input type="text" className={styles.contactInput} placeholder="Nom" required />
-              <input type="email" className={styles.contactInput} placeholder="Email" required />
-              <input type="text" className={styles.contactInput} placeholder="Sujet" required />
-              <textarea className={styles.contactTextarea} placeholder="Votre message" required></textarea>
-              <button type="submit" className={styles.contactButton}>Envoyer</button>
-            </form>
-          </div>
+      <div className="flex flex-col items-center justify-center p-1 bg-white">
+      <h1 className={styles.teamTitle}>Nous Contacter</h1>
+      <p className="mt-2 text-xl text-gray-600">Adresse email: stayalive.eip@gmail.com</p>
+      <div className="relative mt-10 flex w-full items-center justify-center">
+        <img
+          alt="Contact Us Illustration"
+          className="max-w-sm"
+          src="https://media.discordapp.net/attachments/1130401857890697285/1209839674944790618/DALLE_2024-02-21_21.30.41_-_Create_an_image_in_a_flat_design_style_depicting_a_male_customer_service_representative._He_should_be_seated_at_a_desk_deeply_focused_on_his_laptop._.webp?ex=65e86200&is=65d5ed00&hm=8dc355f622b681475a0095b53dffe53b56ede250b7675bb41e64495003d98486&=&format=webp&width=1294&height=1294"
+          style={{
+            aspectRatio: "1242/1200",
+            objectFit: "cover",
+          }}
+          width="1242"
+        />
+      </div>
+    </div>
     </div>
   );
 }

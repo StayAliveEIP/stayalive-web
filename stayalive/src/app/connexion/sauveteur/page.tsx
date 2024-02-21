@@ -6,6 +6,7 @@ import Link from 'next/link';
 import fetch from 'isomorphic-fetch';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Toaster, toast } from 'sonner';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -28,11 +29,17 @@ export default function Home() {
         console.log('Connexion réussie !');
         const data = await response.json();
         localStorage.setItem('accessToken', data.accessToken); // Stockage du token
+        const errorMessage = data.message;
+        toast.success(errorMessage);
         router.push('/dashboard'); // Redirection vers le tableau de bord
       } else {
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.error(errorMessage);
         console.error('Erreur lors de la connexion');
       }
     } catch (error) {
+      toast.error('Erreur lors de la connexion');
       console.error('Erreur lors de la connexion', error);
     }
   };
@@ -40,7 +47,7 @@ export default function Home() {
   return (
     <div>
       <Navbar isLoginPage={true} />
-
+      <Toaster />
       <div className="max-w-sm mx-auto my-10 bg-white rounded-lg shadow-md">
         <div className="bg-gray-700 text-white text-xl font-semibold py-4 px-6 rounded-t-lg">Connexion</div>
         <form className="space-y-6 py-6 px-8">

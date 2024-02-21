@@ -2,9 +2,33 @@
 import Navbar from './components/NavbarC'
 import styles from './navbar.module.css';
 import { ImagesSlider } from "./components/ui/images-slider";
+import { StickyScroll } from "./components/ui/sticky-scroll-reveal";
 import { motion } from "framer-motion";
 import Image from 'next/image';
 import Link from 'next/link';
+
+const content = [
+  {
+    title: "Sauvez des vies près de chez vous !",
+    description:
+      "Stay Alive permet aux centres d’appels de pouvoir notifier une communauté de soignant afin d’intervenir sur des urgences !",
+  },
+  {
+    title: "Localisez les défibrillateurs",
+    description:
+      "Trouvez facilement les défibrillateurs autour de vous partout en France",
+  },
+  {
+    title: "Apprenez les gestes de premiers secours",
+    description:
+      "Formez-vous grâce aux partenaires de StayAlive pour les urgences",
+  },
+  {
+    title: "Rejoignez la communauté",
+    description:
+      "Participez à la communauté de sauveteurs volontaires et formés.",
+  },
+];
 
 export default function Home() {
   const images = [
@@ -46,7 +70,10 @@ export default function Home() {
       <h2 className={styles.text}>Téléchargez gratuitement l’application StayAlive</h2>
       <Image src="https://www.freepnglogos.com/uploads/app-store-logo-png/apple-app-store-travel-awards-globestamp-7.png" className={styles.appstore} alt="Description de l'image" width="1942" height="10" />
       
-      
+
+{/* <StickyScroll content={content} /> */}
+
+
 <div className="bg-gray-50/90 py-12">
   <div className="container mx-auto flex flex-col items-center justify-center gap-4 px-4 text-center md:gap-10 md:px-6">
     <div className="space-y-3 text-center">

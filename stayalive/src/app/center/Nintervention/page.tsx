@@ -5,6 +5,7 @@ import NavBarCenter from '../../components/NavBarCenter';
 import styles from './Nintervention.module.css';
 import Link from 'next/link';
 import { FiArrowLeft } from 'react-icons/fi';
+import { Toaster, toast } from 'sonner';
 
 export default function Center() {
   const [info, setInfo] = useState('');
@@ -39,8 +40,14 @@ export default function Center() {
     });
 
     if (response.ok) {
+      const data = await response.json();
+        const errorMessage = data.message;
+        toast.success(errorMessage);
       console.log('Intervention créée avec succès !');
     } else {
+      const data = await response.json();
+        const errorMessage = data.message;
+        toast.error(errorMessage);
       console.error('Erreur lors de la création de l’intervention');
     }
   };
@@ -48,6 +55,7 @@ export default function Center() {
   return (
     <div>
       <NavBarCenter isLoginPage={false} />
+      <Toaster />
       <div className={styles.pageContainer}>
         <div className={styles.container}>
           <div className={styles.header}>

@@ -78,7 +78,6 @@ export default function Home() {
   return (
 <div>
   <Navbar isLoginPage={true} />
-
   <div className="max-w-sm mx-auto my-10 bg-white rounded-lg shadow-md">
         <div className="bg-gray-700 text-white text-xl font-semibold py-4 px-6 rounded-t-lg">Récupération du mot de passe</div>
         <form className="space-y-6 py-6 px-8">

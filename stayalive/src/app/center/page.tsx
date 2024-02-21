@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import NavBarCenter from '../components/NavBarCenter';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import styles from './center.module.css';
+import { Toaster, toast } from 'sonner';
 
 // Configuration du style du conteneur Google Map
 const containerStyle = {
@@ -109,6 +110,9 @@ export default function Center() {
         setInterventions(data);
         
       } else {
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.error(errorMessage);
         console.error('Erreur lors du chargement des interventions');
       }
     } catch (error) {
@@ -135,6 +139,7 @@ export default function Center() {
   return (
     <div>
       <NavBarCenter isLoginPage={false} />
+      <Toaster />
       <button onClick={handleLogout} className={styles.logoutButton}>Déconnexion</button>
       {/* <LoadScript googleMapsApiKey="VOTRE_CLE_API_GOOGLE_MAPS">
         <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} />

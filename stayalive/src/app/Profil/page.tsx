@@ -5,6 +5,7 @@ import styles from './profil.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import RescueCounter from './components/RescueCounter';
+import { Toaster, toast } from 'sonner';
 
 
 
@@ -75,9 +76,13 @@ export default function Profil() {
         const data = await response.json();
         setSauvegardes(data);
       } else {
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.error(errorMessage);
         console.error('Erreur lors de la récupération de l historique des interventions');
       }
     } catch (error) {
+      toast.error('Erreur lors de la requête');
       console.error('Erreur lors de la requête', error);
     }
   };
@@ -97,7 +102,9 @@ export default function Profil() {
         const data = await response.json();
         setProfileData(data);
       } else {
-        // Gérez les erreurs ici
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error('Erreur lors de la récupération des données du profil', error);
@@ -145,10 +152,14 @@ export default function Profil() {
       });
 
       if (response.ok) {
-        // Gérez la réponse réussie ici
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.success(errorMessage);
         closeEmailModal();
       } else {
-        // Gérez l'erreur ici
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error('Erreur lors de la modification de l email', error);
@@ -176,12 +187,17 @@ export default function Profil() {
       });
 
       if (response.ok) {
-        // Gérez la réponse réussie ici
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.success(errorMessage);
         closePhoneModal();
       } else {
         // Gérez l'erreur ici
       }
     } catch (error) {
+      const data = await response.json();
+        const errorMessage = data.message;
+        toast.error(errorMessage);
       console.error('Erreur lors de la modification du téléphone', error);
     }
   };
@@ -207,12 +223,16 @@ export default function Profil() {
       });
 
       if (response.ok) {
-        // Gérez la suppression réussie du compte ici
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.success(errorMessage);
         closeDeleteModal();
         handleLogout();
         // Redirigez ou déconnectez l'utilisateur
       } else {
-        // Gérez l'erreur ici
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error('Erreur lors de la suppression du compte', error);
@@ -243,10 +263,14 @@ export default function Profil() {
       });
 
       if (response.ok) {
-        // Gérez la réponse réussie ici
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.success(errorMessage);
         closePasswordModal();
       } else {
-        // Gérez l'erreur ici
+        const data = await response.json();
+        const errorMessage = data.message;
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error('Erreur lors du changement de mot de passe', error);
@@ -256,6 +280,7 @@ export default function Profil() {
   return (
     <div>
   <NavbarD isLoginPage={false} />
+  <Toaster />
   <div className={styles.buttonContainer}>
     <button onClick={handleLogout} className={styles.logoutButton}>
       Se déconnecter

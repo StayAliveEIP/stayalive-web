@@ -4,6 +4,8 @@ import styles from './connexion.module.css';
 import { FiArrowLeft } from 'react-icons/fi';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Toaster, toast } from 'sonner';
+
 
 export default function Home() {
   const [isCguChecked, setIsCguChecked] = useState(false);
@@ -40,19 +42,26 @@ export default function Home() {
         
       });
       if (response.ok) {
+        const data = await response.json();
         console.log('Inscription réussie !');
+        const errorMessage = data.message;
+        toast.success(errorMessage);
       } else {
+        const data = await response.json();
         console.error('Erreur lors de la connexion');
+        const errorMessage = data.message;
+        toast.error(errorMessage);
       }
-      console.log('CGU accepted, proceed with signup...');
     } else {
       console.log('Veuillez accepter les CGU pour vous inscrire.');
+      toast.warning('Veuillez accepter les CGU pour vous inscrire.');
     }
   };
 
   return (
     <div>
       <Navbar isLoginPage={false} />
+      <Toaster />
       <div className="max-w-sm mx-auto my-10 bg-white rounded-lg shadow-md">
         <div className="bg-gray-700 text-white text-xl font-semibold py-4 px-6 rounded-t-lg">Création de Compte</div>
         <form className="space-y-6 py-6 px-8">
@@ -92,7 +101,7 @@ export default function Home() {
             </button>
             </div>
             <div className={styles.returnButton}>
-              <Link href="/inscription">
+              <Link href="/">
                 <button className={styles.returnButtonContent}>
                   <FiArrowLeft className={styles.returnButtonIcon} />
                   <span className={styles.returnButtonText}>Retour</span>
