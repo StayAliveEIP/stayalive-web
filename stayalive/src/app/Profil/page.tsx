@@ -192,12 +192,12 @@ export default function Profil() {
         toast.success(errorMessage);
         closePhoneModal();
       } else {
-        // Gérez l'erreur ici
-      }
-    } catch (error) {
-      const data = await response.json();
+        const data = await response.json();
         const errorMessage = data.message;
         toast.error(errorMessage);
+      }
+    } catch (error) {
+        toast.error('Erreur lors de la modification du téléphone');
       console.error('Erreur lors de la modification du téléphone', error);
     }
   };
