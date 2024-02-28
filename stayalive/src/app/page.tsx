@@ -8,9 +8,9 @@ import Link from 'next/link';
 
 export default function Home() {
   const images = [
-    "https://media.discordapp.net/attachments/1130401857890697285/1155854707991003156/mockupStayAlive2.png?width=2592&height=1084",
-    "https://media.discordapp.net/attachments/1130401857890697285/1130407643018702908/stayAlive_mockup_Large.png?ex=65dc4428&is=65c9cf28&hm=e2dcad2e1e6c45b2484170f54480b2980fa77c0bc823aabc365ae55849a6aca2&=&format=webp&quality=lossless&width=2212&height=1294",
-    "https://media.discordapp.net/attachments/1130401857890697285/1130407605458702356/StayAliveUpMockup.png?ex=65dc441f&is=65c9cf1f&hm=36a47a4680985212b9ec226d6d827c5b690e614be364d04c7fe486fee9c74aab&=&format=webp&quality=lossless&width=2300&height=1294",
+    "/mockupStayAliveER.png",
+    "/StayAliveUpMockup.png",
+    "/stayAlive_mockup_Large.png",
   ];
   return (
     <div>
@@ -59,7 +59,7 @@ export default function Home() {
           <Image
             alt="Logo"
             className="object-contain"
-            src="https://media.discordapp.net/attachments/1130401857890697285/1163099431575498902/clipart3194654.png"
+            src="/clipart31946544.png"
             width="96"
             height="96"
           />
@@ -74,7 +74,7 @@ export default function Home() {
           <Image
             alt="Logo"
             className="object-contain"
-            src="https://media.discordapp.net/attachments/1130401857890697285/1163099432460505219/pngwing.com.png"
+            src="/pngwing.com4.png"
             width="150"
             height="150"
           />
@@ -89,7 +89,7 @@ export default function Home() {
           <Image
             alt="Logo"
             className="object-contain"
-            src="https://media.discordapp.net/attachments/1130401857890697285/1163099431873286215/emergency-call-14163.png"
+            src="/emergency-call-141633.png"
             width="150"
             height="150"
           />
