@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from './../components/NavbarC';
 import styles from './TheTeam.module.css';
 import Image from 'next/image';
-import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
 
 const teamMembers = [
   {
@@ -81,42 +80,6 @@ export default function TheTeam() {
     <div>
       <Navbar isLoginPage={false} />
       <h1 className={styles.teamTitle}>Une équipe de 6 développeurs</h1>
-      {/* <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem'}}>
-        {teamMembers.map((member, index) => (
-          <CardContainer key={index}>
-          <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[15rem] sm:h-[20rem] h-auto rounded-xl p-6 border  ">
-            <CardItem
-              translateZ="50"
-              className="text-xl font-bold text-neutral-600 dark:text-white"
-            >
-              {member.name}
-            </CardItem>
-            <CardItem
-              translateZ="50"
-              className="text-l font-medium text-neutral-600 dark:text-white"
-            >
-              {member.role}
-            </CardItem>
-            <CardItem
-              as="p"
-              translateZ="60"
-              className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-            >
-              {member.description}
-            </CardItem>
-            <CardItem translateZ="100" className="w-32 mt-4">
-              <Image
-                src={member.image}
-                height="1000"
-                width="1000"
-                className="h-50 w-full object-cover group-hover/card:shadow-xl rounded-full"
-                alt="thumbnail"
-              />
-            </CardItem>
-          </CardBody>
-        </CardContainer>
-        ))}
-      </div> */}
       <div className={styles.teamContainer}>
         {teamMembers.map((member, index) => (
           <div key={index} className={styles.memberCard}>
