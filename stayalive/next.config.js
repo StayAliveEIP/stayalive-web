@@ -1,18 +1,20 @@
-const nextConfig = {
-  reactStrictMode: true,
-  i18n,
-  sassOptions: {
-      includePaths: [path.join(__dirname, 'src/styles')],
-      prependData: `@import "variables.scss";`,
-  },
-  images: {
-      remotePatterns: [
-          {
-              protocol: 'https',
-              hostname: '**',
-              port: '',
-              pathname: '**',
-          },
-      ],
-  },
-}
+/** @type {import('next').NextConfig} */
+const nextConfig = {}
+
+module.exports = {
+    images: {
+      domains: ['media.discordapp.net', 'www.freepnglogos.com'],
+    },
+    async rewrites() {
+      return [
+        {
+          source: '/auth/register',
+          destination: 'http://api.stayalive.fr:3000/auth/register',
+        },
+        {
+          source: '/auth/login',
+          destination: 'http://api.stayalive.fr:3000/auth/login',
+        },
+      ];
+    },
+  };
