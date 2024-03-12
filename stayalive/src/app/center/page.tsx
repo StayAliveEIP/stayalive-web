@@ -79,7 +79,7 @@ const Modal: React.FC<Props> = ({ isOpen, onClose, intervention }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center" onClick={handleOverlayClick}>
   <div className="bg-white p-6 rounded-lg max-w-lg w-full mx-4" onClick={e => e.stopPropagation()}>
-    <h2 className="text-2xl font-bold mb-4">Détails de l'Intervention</h2>
+    <h2 className="text-2xl font-bold mb-4">Détails de l&apos;Intervention</h2>
     <p className="mb-2">Nom et prénom du sauveteur: <span className="font-semibold">{firstname} {lastname}</span></p>
     <p className="mb-2">Numéro de téléphone du sauveteur: <span className="font-semibold">{phone}</span></p>
     <p className="mb-2">Numéro d&apos;intervention: <span className="font-semibold">{intervention.id}</span></p>
