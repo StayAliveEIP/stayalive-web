@@ -83,7 +83,7 @@ const Modal: React.FC<Props> = ({ isOpen, onClose, intervention }) => {
     <p className="mb-2">Nom et prénom du sauveteur: <span className="font-semibold">{firstname} {lastname}</span></p>
     <p className="mb-2">Numéro de téléphone du sauveteur: <span className="font-semibold">{phone}</span></p>
     <p className="mb-2">Numéro d&apos;intervention: <span className="font-semibold">{intervention.id}</span></p>
-    <p className="mb-2">Statut de l&apos;intervention: <span className={`font-semibold ${intervention.status === 'Active' ? 'text-green-500' : 'text-red-500'}`}>{intervention.status}</span></p>
+    <p className="mb-2">Statut de l&apos;intervention: <span className={`font-semibold ${intervention.status === InterventionStatus.EnCours ? 'text-green-500' : 'text-red-500'}`}>{intervention.status}</span></p>
     <p className="mb-2">Adresse de l&apos;intervention: <span className="font-semibold">{intervention.address}</span></p>
     <p className="mb-4">Informations supplémentaires: <span className="font-semibold">{intervention.info}</span></p>
     <div className="flex justify-between">
